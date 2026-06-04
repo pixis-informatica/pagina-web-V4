@@ -1,0 +1,184 @@
+{
+  "texts": {
+    "texts-1-1776789991272": "RetirÃƒÆ’Ã‚Â¡ gratis",
+    "texts-223-1776812544363": "DISCO SSD SATA 480GB 2.5 HIKSEMI para putos",
+    "texts-1-1776812544362": "ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥ DESTACADOS ssss ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥",
+    "texts-223-1776815505263": "ssd",
+    "texts-1-1776819158476": "ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥ DESTACADOS pixis ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥",
+    "texts-1-1776819326737": "ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥ PIXIS ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥",
+    "texts-1-1776819367598": "ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥ PIXIS ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥",
+    "texts-223-1776819457891": "SSD HIKSEMI 480GB",
+    "texts-223-1776819501415": "SSD480GB",
+    "texts-1-1776819775212": "ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥ DESTACADOS ÃƒÂ°Ã…Â¸Ã¢â‚¬Â Ã‚Â¥",
+    "body#top > section:nth-of-type(3) > h2": {
+      "text": "🔥destacados🔥",
+      "style": {
+        "width": "355.094px",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "inline-block",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "div#nuevosIngresosTrack > a:nth-of-type(4) > h3": {
+      "text": "VGA Gigabyte GeForce RTX 5050 8G GAMING OC",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "div#destacadosTrack > a:nth-of-type(6) > h3": {
+      "text": "Monitor Gamer Raptor Hawk Eye 24\" Frameless IPS FHD 200Hz 1Ms HDMI-DP",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "body#top > header > div:nth-of-type(3) > div > div > small": {
+      "text": "Jujuy 412 Edificio San Antonio 2° piso oficina \"B\"",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "translate(-73px, -41px)",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "section#reelsSection > div > h2": {
+      "text": "🔥nUESTROS REELS🔥",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "body#top > section:nth-of-type(3) > div > div:nth-of-type(2) > b": {
+      "text": "Pagá con tarjeta de crédito",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "body#top > header > div > div > span": {
+      "text": "PC, hardware y servicio técnico \n                en Santiago del Estero",
+      "style": {
+        "width": "465.875px",
+        "fontSize": "19.5px",
+        "lineHeight": "24.2px",
+        "textAlign": "",
+        "display": "inline-block",
+        "transform": "translate(9px, 2px)",
+        "position": "relative",
+        "zIndex": "100"
+      }
+    },
+    "div#nuevosIngresosTrack > a:nth-of-type(3) > p": {
+      "text": "500w",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    },
+    "div#destacadosTrack > a:nth-of-type(2) > h3": {
+      "text": "Fuente Raptor Volt 500W 80 Plus Silver Blanco",
+      "style": {
+        "width": "",
+        "fontSize": "",
+        "lineHeight": "",
+        "textAlign": "",
+        "display": "",
+        "transform": "",
+        "position": "",
+        "zIndex": ""
+      }
+    }
+  },
+  "images": {
+    "section#nuevosIngresosSection > div > div > div > a:nth-of-type(5) > picture > img": {
+      "src": "http://localhost:8080/img/carrusel/banner-raptor-monitor-pc-2-1778942603711.jpg",
+      "alt": "Promo",
+      "href": "?banner=monitores-raptor"
+    },
+    "section#nuevosIngresosSection > div > div > div > a > picture > img": {
+      "src": "http://localhost:8080/img/des/actegorias.svg",
+      "alt": "Promo",
+      "href": "?banner=ssdhikesmi"
+    },
+    "section#nuevosIngresosSection > div > div > div > a:nth-of-type(4) > picture > img": {
+      "src": "http://localhost:8080/img/des/perifericos-raptor-pc.svg",
+      "alt": "Promo",
+      "href": "?banner=perifericos-raptor"
+    },
+    "body#top > header > div:nth-of-type(2) > a > img": {
+      "src": "img/uploads/img-1779581904446.png",
+      "alt": "PIXIS InformÃ¡tica",
+      "href": "index.html"
+    },
+    "body#top > header > div:nth-of-type(2) > a > img:nth-of-type(2)": {
+      "src": "img/uploads/img-1779560732275.png",
+      "alt": "Mascota PIXIS",
+      "href": "index.html"
+    },
+    "section#aprendeSection > div:nth-of-type(2) > div > a:nth-of-type(3) > img": {
+      "src": "https://img.youtube.com/vi/gZ-wXPUasYY/hqdefault.jpg",
+      "alt": "Video YouTube 3",
+      "href": "https://youtu.be/gZ-wXPUasYY?si=cKrpwHkQ2_ARQRzf"
+    },
+    "div#categorias > div > div:nth-of-type(2) > a:nth-of-type(14) > div > img": {
+      "src": "img/uploads/img-1780074788579.png",
+      "alt": "Procesadores",
+      "href": "#Procesadores"
+    }
+  },
+  "sections": {
+    "body#top > section:nth-of-type(3) > div:nth-of-type(2)": {
+      "paddingTop": "0px",
+      "paddingBottom": "",
+      "backgroundColor": "rgb(0, 0, 0)",
+      "display": ""
+    },
+    "section#nuevosIngresosSection > div": {
+      "paddingTop": "",
+      "paddingBottom": "",
+      "backgroundColor": "rgb(0, 0, 0)",
+      "display": ""
+    }
+  },
+  "deleted": [],
+  "_comment": "Cambios visuales del editor. NO editar manualmente."
+}

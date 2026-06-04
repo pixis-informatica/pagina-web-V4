@@ -1,0 +1,132 @@
+{
+  "topBannerText": "SERVICIO TECNICO ESPECIALIZADO EN COMPUTACION Y MANTENIMIENTO EN CONSOLAS",
+  "address": "Jujuy 412 Edificio San Antonio 2° piso oficina \"B\"",
+  "phone": "+54 9 3856 97-0135",
+  "email": "pixisinformatica.contacto@gmail.com",
+  "instagram": "https://www.instagram.com/pixisinformatica/",
+  "facebook": "https://www.facebook.com/profile.php?id=100065599325306",
+  "tiktok": "https://www.tiktok.com/@pixis.informatica?is_from_webapp=1&sender_device=pc",
+  "youtube": "https://www.youtube.com/@PIXIS.INFORMATICA",
+  "whatsappLink": "https://wa.me/message/EYUUSVNG5HPNF1",
+  "carouselTop": [
+    {
+      "imgPc": "img/carrusel/caracol-1780094855042.jpg",
+      "imgMobile": "img/carrusel/apex-movil-1780094738451.jpg",
+      "bannerId": "joysticksraptorapex"
+    },
+    {
+      "imgPc": "img/carrusel/banner-kit-ryzen-pc-1779224855793.jpg",
+      "imgMobile": "img/carrusel/banner-kit-ryzen-movil-1779224860684.jpg",
+      "bannerId": "kitryzen"
+    },
+    {
+      "imgPc": "img/carrusel/banner-pc-1779225174059.jpg",
+      "imgMobile": "img/carrusel/banner-pc-movil--1779225178512.jpg",
+      "bannerId": "pccombo"
+    },
+    {
+      "imgPc": "img/carrusel/mini-pc-pc-1779478506841.jpg",
+      "imgMobile": "img/carrusel/mini-pc-mobile-1779478510259.jpg",
+      "bannerId": "notebooks"
+    },
+    {
+      "imgPc": "img/carrusel/gabinetes-pc--2--1780525161711.jpg",
+      "imgMobile": "img/carrusel/perifericos-mobile--3--1780525170853.jpg",
+      "bannerId": "gabinetesmlogix"
+    }
+  ],
+  "carouselBottom": [
+    {
+      "imgPc": "img/carrusel/nivida-pc-1780098068637.jpg",
+      "imgMobile": "img/carrusel/nvidia-mobile-1780098073825.jpg",
+      "bannerId": "geforcertxseries50"
+    },
+    {
+      "imgPc": "img/carrusel/monitor-rapto-pc-1779478620997.jpg",
+      "imgMobile": "img/carrusel/monitor-rapto-mobile-1779478624353.jpg",
+      "bannerId": "monitor"
+    },
+    {
+      "imgPc": "img/carrusel/refrigeracion-pc-1780417513051.jpg",
+      "imgMobile": "img/carrusel/refrigeracion-mobile-1780417519921.jpg",
+      "bannerId": "refrigeracion-raptor"
+    },
+    {
+      "imgPc": "img/carrusel/gabinetes-pc-1780524309494.jpg",
+      "imgMobile": "img/carrusel/perifericos-mobile--2--1780524320127.jpg",
+      "bannerId": "gabinetes-raptor"
+    },
+    {
+      "imgPc": "img/carrusel/perifericos-pc-1780524339760.jpg",
+      "imgMobile": "img/carrusel/perifericos-mobile-1780524342977.jpg",
+      "bannerId": "perifericos-raptor"
+    },
+    {
+      "imgPc": "img/carrusel/banner-kit-tecnico-pc-1779922935392.jpg",
+      "imgMobile": "img/carrusel/banner-kit-tecnico-movil-1779922938704.jpg",
+      "bannerId": "kittecnico"
+    }
+  ],
+  "banners": {
+    "kitryzen": {
+      "f": "kitRyzen",
+      "t": "Kits de Actualización Ryzen"
+    },
+    "pccombo": {
+      "f": "pcCombo",
+      "t": "PC Gamers y Combos"
+    },
+    "monitor": {
+      "f": "monitorRaptor",
+      "t": "Monitores Raptor"
+    },
+    "notebooks": {
+      "f": "notebookMiniPc",
+      "t": "Notebooks y Mini PCs"
+    },
+    "ssd-hiksemi": {
+      "f": "ssdHiksemi",
+      "t": "SSDs Hiksemi"
+    },
+    "refrigeracion-raptor": {
+      "f": "refrigeracionRaptor",
+      "t": "Refrigeración Raptor"
+    },
+    "gabinetes-raptor": {
+      "f": "gabinetesRaptor",
+      "t": "Gabinetes Raptor"
+    },
+    "perifericos-raptor": {
+      "f": "perifericosRaptor",
+      "t": "Periféricos Raptor"
+    },
+    "kittecnico": {
+      "f": "kittecnico",
+      "t": "KIT TECNICO"
+    },
+    "joysticksraptorapex": {
+      "f": "joysticksraptorapex",
+      "t": "Joysticks RAPTOR APEX"
+    },
+    "geforcertxseries50": {
+      "f": "geforcertxseries50",
+      "t": "GEFORCE RTX SERIES 50"
+    },
+    "gabinetesmlogix": {
+      "f": "gabinetesmlogix",
+      "t": "GABINETES MLOGIX"
+    }
+  },
+  "cacheVersion": 1780591533378,
+  "tasasCuotas": [
+    1.13,
+    1.31,
+    1.31,
+    1.6,
+    1.6
+  ],
+  "imageOptimization": {
+    "enabled": false,
+    "proxyUrl": "https://images.weserv.nl/?url="
+  }
+}

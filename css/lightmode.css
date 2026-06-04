@@ -1,0 +1,933 @@
+body.light-mode {
+  background:
+    linear-gradient(rgba(244, 247, 251, 0.95), rgba(224, 232, 245, 0.95)),
+    url("../img/fondo-B-mobile.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  color: #333333;
+}
+@media (min-width: 769px) {
+  body.light-mode {
+    background:
+      linear-gradient(rgba(244, 247, 251, 0.95), rgba(224, 232, 245, 0.95)),
+      url("../img/fondo-B-pc.webp");
+
+    background-attachment: fixed;
+  }
+}
+
+.btn-top { 
+    background: linear-gradient(45deg, #ffffffc9, #1fccd8);
+    box-shadow: 0 0 20px #000000;
+ }
+
+/* TITULOS */
+
+/* CONTENEDOR DESTACADOS */
+.destacados {
+    /* Hereda estructura y padding exacto de style.css */
+}
+
+.destacados h2 {
+    color: #1e293b;
+    /* título principal más oscuro, gris empresarial */
+    text-shadow: none;
+}
+
+.btn-prev,
+.btn-next {
+    background: rgba(0, 255, 255, 0.7);
+    color: #f8f8f8;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+    background: #00ffff;
+    color: #ffffff;
+}
+
+.nuevos-ingresos .card {
+    background: #ffffff;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(270deg, red, orange, yellow, lime, cyan, blue, violet, red) border-box;
+    background-size: 400% 400%;
+    animation: rgbBorder 6s linear infinite;
+}
+
+@media (max-width: 768px) {
+    .nuevos-ingresos .card {
+        border: 2px solid #ff00ff !important;
+        background: #ffffff !important;
+        animation: none !important;
+    }
+}
+
+/* CARRUSEL */
+.carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.destacados .productos,
+.nuevos-ingresos .productos {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    padding-bottom: 20px;
+}
+
+/* pausa al pasar el mouse ELIMINADA */
+
+/* NUEVO: Contenedor scrolleable fluido y ocultación de scrollbar */
+.carousel {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.carousel:active {
+    cursor: grabbing;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel .card {
+    scroll-snap-align: start;
+}
+
+/* CARDS DENTRO DEL CARRUSEL */
+.destacados .card {
+    background: rgba(255, 255, 255, 0.85);
+    /* blanco traslúcido glassmorphism */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 210, 224, 0.7);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.nuevos-ingreso {
+    color: #000000;
+    text-shadow: none;
+}
+
+.destacados .card:hover {
+    border-color: #3b82f6;
+}
+
+.link-producto {
+    background: #00ff73;
+    border: 2px solid #000000;
+    color: #000000;
+}
+
+.link-producto:hover {
+    background: #26d4ff;
+    color: #fff;
+}
+
+/* TITULO H3 */
+.destacados .card h3 {
+    color: #0f172a;
+}
+
+/* DESCRIPCION */
+.destacados .card p {
+    color: #334155;
+    /* gris muy oscuro para máximo contraste */
+    font-weight: 500;
+}
+
+.destacados .card img,
+.card img {
+    background: #f8fafc;
+    /* Fondo minimamente grisáceo para que imágenes con fondo blanco puro resalten */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Sombra difuminada interna para demarcar el borde de la imagen */
+}
+
+/* PRECIO */
+.destacados .card .precio-local {
+    color: #0f766e;
+    font-weight: bold;
+}
+
+.destacados .card .precio-especial {
+    color: #059669;
+    /* Verde robusto */
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.Gabinetes h2 {
+    color: #1e293b;
+    text-shadow: none;
+}
+
+.categoria {
+    color: #4338ca;
+    /* Indigo moderno en lugar de violeta brillante */
+    text-shadow: none;
+}
+
+/* CATEGORIAS NAV */
+.categorias-nav a {
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    color: #334155;
+    font-weight: 500;
+}
+
+.categorias-nav a:hover {
+    box-shadow: 0 6px 14px rgba(100, 116, 139, 0.2);
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+/* FILTROS */
+.filtros-panel {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-filtro {
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    background: transparent;
+}
+
+.btn-filtro:hover {
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    background: #f0fdf4;
+}
+
+.btn-filtro.activo {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #1d4ed8;
+    font-weight: 600;
+}
+
+/* TARJETAS PRODUCTO */
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: #93c5fd;
+}
+
+.card h3 {
+    color: #0f172a;
+}
+
+.card p {
+    color: #64748b;
+}
+
+.pulsante {
+    display: block;
+}
+
+/* PRECIO (IMPORTANTE QUE RESALTE) */
+.precio {
+    color: #059669;
+    /* Verde elegante y fuerte */
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.precio-viejo {
+    color: #ef4444;
+    /* Rojo suave */
+}
+
+.precio-oferta {
+    color: #10b981;
+}
+
+.precio-lista {
+    color: #64748b;
+}
+
+/* BOTONES */
+.btn-add-cart {
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid #2563eb;
+    /* Azul corporativo moderno */
+    background: transparent;
+    color: #2563eb;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+    background: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-cart {
+    background: #475569;
+    color: white;
+}
+
+.btn-cart:hover {
+    background: #334155;
+}
+
+.btn-wsp {
+    background: linear-gradient(45deg, #22c55e, #16a34a);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    color: white;
+}
+
+.btn-wsp:hover {
+    background: linear-gradient(45deg, #16a34a, #15803d);
+    box-shadow: 0 8px 15px rgba(22, 163, 74, 0.3);
+}
+
+/* BUSCADOR */
+#searchInput {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0px;
+    padding-left: 20px;
+}
+
+#searchInput::placeholder {
+    color: #ffffff;
+}
+
+#searchInput:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* MODAL PRODUCTO */
+
+.modal-content {
+    background: #ffffff;
+    border: 1px solid #cfd5e1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-img-container {
+    background: #6c6d6e;
+}
+
+.modal-desc {
+    color: #555;
+}
+
+.modal-price {
+    color: #008a3d;
+}
+
+.modal-close {
+    color: #2a2a2a;
+}
+
+/* texto general modal */
+.modal-content {
+    color: #868484;
+}
+
+/* titulos */
+.modal-content h1,
+.modal-content h2,
+.modal-content h3 {
+    color: #1a1a1a;
+}
+
+/* listas y descripciones */
+.modal-content p,
+.modal-content li {
+    color: #3a3a3a;
+}
+
+.modal-precios span {
+    color: #000;
+}
+
+.precio-contado {
+    color: #000;
+}
+
+.precio-local strong {
+    color: #00a86b;
+}
+
+.precio-lista strong {
+    color: #000;
+}
+
+.btn-ver-cuotas {
+    border: 1px solid #00ff22;
+    color: #000000;
+
+}
+
+.modal-cuotas-detalle {
+    background: rgba(184, 184, 184, 0.85);
+}
+
+.modal-cuotas-detalle h3 {
+    color: #000000;
+}
+
+.cuotas-content {
+    background: #cccccc;
+}
+
+
+.fila-cuota {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.cuota-total {
+
+    color: #000000;
+}
+
+.fila-cuota {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fila-cuota span:first-child {
+    color: #000000;
+}
+
+.total-cuotas {
+    color: #07b81f;
+
+}
+
+
+/* CARRITO */
+
+.cart-modal {
+    background: #ffffff;
+    border: 1px solid #cfd5e1;
+}
+
+.cart-header {
+    border-bottom: 1px solid #cfd5e1;
+}
+
+.cart-header h3 {
+    color: #0284c7; /* Celeste/Azul de alta visibilidad */
+}
+
+.close-cart {
+    color: #334155 !important;
+}
+
+.close-cart:hover {
+    color: #ef4444 !important;
+}
+
+.cart-footer {
+    background: #ffffff;
+    border-top: 1px solid #cfd5e1;
+}
+
+.cart-item {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.cart-item h4 {
+    color: #0f172a;
+}
+
+.cart-item span {
+    color: #059669 !important; /* Verde precio de alta visibilidad */
+}
+
+/* Cantidad */
+
+.cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cart-qty button {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1 !important;
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cart-qty button:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+.cart-qty span {
+    font-size: 13px;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+    color: #0f172a !important; /* Cantidad de producto legible */
+}
+
+.cart-total {
+    border-top: 2px solid #059669;
+}
+
+.cart-total strong {
+    color: #000000 !important; /* Total en color negro para que no se pierda */
+}
+
+/* INPUTS */
+
+.cart-section {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.cart-section h4 {
+    color: #1e3a8a !important; /* Títulos de sección legibles */
+}
+
+.cart-section input[type="text"] {
+    background: #ffffff;
+    border: 1px solid #cfd5e1;
+    color: #2a2a2a;
+}
+
+#selectCuotas {
+    background: #ffffff;
+    border: 1px solid #cfd5e1;
+    color: #2a2a2a;
+}
+
+#btnAbrirTerminos {
+    color: #2563eb !important;
+}
+
+#btnAbrirTerminos:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+}
+
+.aviso-tarjeta {
+    color: #4b5563 !important;
+}
+
+.aviso-envio-pago {
+    background: #fdf2f8 !important;
+    border-left: 4px solid #db2777 !important;
+    color: #831843 !important;
+}
+
+.aviso-envio-pago strong {
+    color: #be185d !important;
+}
+
+.cuota-item-carrito {
+    background: rgba(5, 150, 105, 0.05) !important;
+    border: 1px solid rgba(5, 150, 105, 0.2) !important;
+    color: #0f172a !important;
+}
+
+.cuota-item-carrito strong {
+    color: #059669 !important;
+}
+
+.cart-cuotas-mensaje {
+    background: rgba(5, 150, 105, 0.05) !important;
+    border: 1px solid rgba(5, 150, 105, 0.2) !important;
+    color: #0f172a !important;
+}
+
+.cart-cuotas-mensaje strong {
+    color: #059669 !important;
+}
+
+.cart-cuotas-mensaje small {
+    color: #4b5563 !important;
+}
+
+/* MODAL TERMINOS */
+.terminos-contenido {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cfd5e1 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.terminos-contenido h3 {
+    color: #1e3a8a !important;
+}
+
+.terminos-texto p {
+    color: #334155 !important;
+}
+
+.cerrar-terminos {
+    color: #334155 !important;
+}
+
+.cerrar-terminos:hover {
+    color: #ef4444 !important;
+}
+
+/* BOTON FINALIZAR */
+
+.btn-finish {
+    background: linear-gradient(90deg, #0055f1, #72e1f0);
+}
+
+/* BOTON VACIAR */
+
+#btn-clear-cart {
+    background: #ff4d4d;
+}
+
+/* FOOTER */
+
+.footer {
+    border-top: 1px solid #cfd5e1;
+    color: #000000;
+}
+
+.footer-follow span {
+    color: #ff00f2;
+}
+
+/* REDES */
+
+.red {
+    background: #3b3b3b;
+    box-shadow: 0 4px 10px rgba(253, 2, 241, 0.1);
+}
+
+/* SEPARADOR */
+
+.separador-categoria {
+    background: #484849;
+}
+
+/* TEMA CLARO - PANEL DE CATEGORÍAS (Desktop Only) */
+@media (min-width: 769px) {
+    body.light-mode .categorias-nav {
+        background: #ffffff !important;
+        border: 1px solid #ddd !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    body.light-mode .categorias-nav a {
+        background: #475569 !important; /* Gris oscuro/medio pálido profesional */
+        color: #ffffff !important;
+        border: 1px solid rgba(0,0,0,0.1) !important;
+    }
+
+    body.light-mode .categorias-nav a:hover {
+        background: #334155 !important; /* Gris más oscuro en hover */
+        color: #ffffff !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+    }
+
+    body.light-mode .cat-icon-frame {
+        color: #ffffff !important;
+    }
+
+    body.light-mode .cat-name {
+        color: #ffffff !important;
+    }
+
+    /* Estado activo en modo claro */
+    body.light-mode .categorias-nav a.cat-activa {
+        background: #1e293b !important; /* Gris casi negro para resaltar */
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
+    }
+
+    body.light-mode .categorias-nav a.cat-activa::after {
+        background: #3b82f6 !important;
+        box-shadow: 0 0 5px #3b82f6 !important;
+        content: "" !important; /* Quitar texto 'Aquí' en desktop */
+    }
+
+    body.light-mode #btnCategorias {
+        background: #ffffff !important;
+        color: #334155 !important;
+    }
+}
+
+
+
+/* =========================
+   MODAL CUOTAS SUPERPUESTO
+========================= */
+
+.modal-cuotas-detalle {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+
+.modal-cuotas-detalle h3 {
+    color: #ffffff;
+}
+
+.modal-cuotas-detalle h1 {
+    color: #ffffff;
+}
+
+.cuotas-content {
+    background: #646363;
+}
+
+.cabecera-cuotas {
+    color: #000000;
+}
+
+.fila-cuota {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.col-total {
+    color: #000000;
+}
+
+/* =========================
+MODO CLARO BOTON
+========================= */
+
+.theme-icon {
+
+    background: white;
+    color: black;
+    border: 2px solid black;
+
+}
+
+.theme-text {
+
+    color: black;
+
+}
+
+.theme-text2 {
+    color: #000000;
+}
+
+
+
+
+/* ALTA VISIBILIDAD EN MODO OFICINA */
+h1:not(.main-header h1),
+h2:not(.neon-title),
+h3,
+h4,
+h5,
+h6,
+p,
+span:not(.cart-count):not(.cart-qty span):not(.neon-title),
+div:not(.cart-qty):not(.btn-filtro):not(.main-header):not(.main-header div):not(.logo-container) {
+    color: #000000;
+}
+
+.card h3,
+.card p,
+.card span.precio {
+    color: #000 !important;
+}
+
+.card span.precio {
+    color: #059669 !important;
+    /* Restore green for price */
+}
+
+.neon-title {
+    color: #000 !important;
+    text-shadow: none !important;
+}
+
+
+/* RESTAURAR COLORES DEL HEADER (Modo Oficina no debe oscurecer el texto del Navbar) */
+.main-header,
+.main-header span,
+.main-header i,
+.main-header p,
+.main-header h1,
+.main-header h2,
+.main-header a,
+.main-header div:not(.search-bar):not(.theme-toggle) {
+    color: #ffffff !important;
+}
+
+.search-bar i {
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .categorias-nav a {
+        display: block;
+        width: 100%;
+
+        background: #ffffff;
+        color: #111;
+        /* 🔥 CLAVE */
+
+        font-size: 12px;
+        padding: 7px 10px;
+
+        text-decoration: none;
+        border-bottom: 1px solid rgba(176, 38, 255, 0.2);
+
+        box-sizing: border-box;
+    }
+
+    .categorias-nav a:hover,
+    .categorias-nav a:active {
+        background: rgba(176, 38, 255, 0.15);
+        color: #000;
+        /* 🔥 asegurás contraste */
+    }
+
+    .categorias-nav a {
+        color: #111 ;
+    }
+}
+/* =========================
+   HEADER TOP TEXT (BASE)
+========================= */
+.header-top-text {
+    background: #ffffff;
+    color: #000000;
+}
+@media (max-width: 768px) {
+    .header-top-text {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+}
+
+/* ==========================================================
+   MODO CLARO \u2014 Elementos con fondo oscuro (#0e0016)
+   Todos los nuevos marcos RGB: fondo claro + texto visible
+========================================================== */
+
+/* Bot\u00f3n Men\u00fa de Productos */
+.btnCategorias,
+.btnCategorias::after {
+    background: #eef2ff !important;
+}
+.btnCategorias::before {
+    opacity: 0.5;
+}
+.btnCategorias span {
+    color: #1e0050 !important;
+    -webkit-text-fill-color: #1e0050 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+/* T\u00edtulos de secci\u00f3n: Destacados y Nuevos Ingresos */
+.destacados h2,
+.destacados h2::after,
+.nuevos-ingreso,
+.nuevos-ingreso::after {
+    background: #eef2ff !important;
+}
+.destacados h2,
+.nuevos-ingreso {
+    color: #1e0050 !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #1e0050 !important;
+}
+
+/* T\u00edtulos de Reels y Aprende */
+.neon-title,
+.neon-title::after {
+    background: #eef2ff !important;
+}
+.neon-title {
+    color: #1e0050 !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #1e0050 !important;
+    animation: none !important;
+}
+
+/* Botones YouTube */
+.yt-button,
+.yt-button::after {
+    background: #eef2ff !important;
+}
+.yt-button {
+    color: #1e0050 !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #1e0050 !important;
+    animation: none !important;
+}
+.yt-button:hover {
+    color: #7f00ff !important;
+    -webkit-text-fill-color: #7f00ff !important;
+    box-shadow: 0 0 14px rgba(127, 0, 255, 0.2) !important;
+}
+
+/* Centrado correcto de los títulos en modo claro */
+.destacados h2,
+.nuevos-ingreso,
+.neon-title {
+    /* Hereda alineación de style.css */
+}
+.btnCategorias {
+    /* Hereda dimensiones de style.css */
+}
+
+/* --- AJUSTES DE PRODUCTOS MODO OFICINA --- */
+
+/* 1. Borde negro para todos los productos */
+body.light-mode .card,
+body.light-mode .destacados .card {
+    border: 1px solid #000000 !important;
+}
+
+/* 2. Deactivar efecto pulsante (sombra) en general */
+body.light-mode .pulsante2 {
+    animation: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important; /* Sombra estática suave */
+}
+
+/* 3. EXCEPCIÓN: Nuevos Ingresos mantiene su efecto original (RGB y Pulso) */
+body.light-mode .nuevos-ingresos .card {
+    border: 2px solid transparent !important; /* Mantiene el borde RGB */
+}
+
+body.light-mode .nuevos-ingresos .card.pulsante2 {
+    animation: pulse 1.5s infinite !important; /* Restaura el pulso */
+}

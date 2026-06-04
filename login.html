@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIXIS — Acceso al Editor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #f5c518;
+      --gold2:   #ffd700;
+      --dark:    #0a0a0f;
+      --panel:   rgba(12,12,20,0.92);
+      --border:  rgba(245,197,24,0.35);
+      --glow:    rgba(245,197,24,0.18);
+      --error:   #ff4d4d;
+      --success: #00e676;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Fondo animado de partículas ── */
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Tarjeta principal ── */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 52px 44px 44px;
+      width: min(420px, 92vw);
+      box-shadow:
+        0 0 60px rgba(245,197,24,0.12),
+        0 32px 64px rgba(0,0,0,0.7);
+      backdrop-filter: blur(18px);
+      animation: slideUp .55s cubic-bezier(.22,.68,0,1.2) both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .logo-wrap img {
+      width: 170px;
+      height: 170px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 22px rgba(245,197,24,0.55));
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 18px rgba(245,197,24,0.45)); }
+      50%       { filter: drop-shadow(0 0 36px rgba(245,197,24,0.80)); }
+    }
+
+    /* ── Título ── */
+    .card h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: .78rem;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    /* ── Inputs ── */
+    .field {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .field label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 600;
+      color: rgba(245,197,24,0.75);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      padding: 13px 44px 13px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: .95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+    }
+    .field input:focus {
+      border-color: var(--gold);
+      background: rgba(245,197,24,0.05);
+      box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+    }
+    .field input::placeholder { color: rgba(255,255,255,0.22); }
+
+    /* ojo de contraseña */
+    .eye-btn {
+      position: absolute;
+      right: 12px;
+      bottom: 13px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.35);
+      font-size: 1rem;
+      line-height: 1;
+      transition: color .2s;
+      padding: 0;
+    }
+    .eye-btn:hover { color: var(--gold); }
+
+    /* ── Botón ── */
+    #loginBtn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #c8961a 0%, var(--gold2) 50%, #c8961a 100%);
+      border: none;
+      border-radius: 10px;
+      color: #0a0a0f;
+      font-family: 'Orbitron', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(245,197,24,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    #loginBtn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+    #loginBtn:hover::after { transform: translateX(100%); }
+    #loginBtn:hover { box-shadow: 0 6px 32px rgba(245,197,24,0.55); transform: translateY(-1px); }
+    #loginBtn:active { transform: translateY(1px); }
+    #loginBtn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    /* ── Mensaje de error ── */
+    #errMsg {
+      display: none;
+      text-align: center;
+      font-size: .82rem;
+      color: var(--error);
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(255,77,77,0.1);
+      border: 1px solid rgba(255,77,77,0.3);
+      border-radius: 8px;
+      animation: shake .35s ease;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60%  { transform: translateX(-6px); }
+      40%,80%  { transform: translateX(6px); }
+    }
+
+    /* ── Intentos bloqueados ── */
+    #lockMsg {
+      display: none;
+      text-align: center;
+      font-size: .82rem;
+      color: var(--error);
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.25);
+      border-radius: 8px;
+    }
+
+    /* ── Footer ── */
+    .footer-text {
+      text-align: center;
+      font-size: .68rem;
+      color: rgba(255,255,255,0.18);
+      margin-top: 28px;
+      letter-spacing: .08em;
+    }
+
+    /* ── Loading spinner en botón ── */
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(10,10,15,0.4);
+      border-top-color: #0a0a0f;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Borde dorado animado ── */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      background: conic-gradient(from var(--angle, 0deg), transparent 70%, var(--gold) 80%, transparent 90%);
+      z-index: -1;
+      animation: rotateBorder 4s linear infinite;
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    @keyframes rotateBorder { to { --angle: 360deg; } }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="card" role="main" aria-label="Panel de inicio de sesión del editor">
+
+  <div class="logo-wrap">
+    <img src="img/logo_pixis.png" alt="Logo PIXIS Informática">
+  </div>
+
+  <h1>Acceso al Editor</h1>
+  <p class="subtitle">Panel administrativo · Pixis Informática</p>
+
+  <form id="loginForm" autocomplete="off" onsubmit="return false;">
+
+    <!-- PASO 1: Usuario y Password -->
+    <div id="step1">
+      <div class="field">
+        <label for="usr">Usuario</label>
+        <input id="usr" type="text" name="username" placeholder="Ingresá tu usuario" autocomplete="off" required>
+      </div>
+
+      <div class="field">
+        <label for="pwd">Contraseña</label>
+        <input id="pwd" type="password" name="password" placeholder="Ingresá tu contraseña" autocomplete="new-password" required>
+        <button type="button" class="eye-btn" id="eyeBtn" aria-label="Mostrar/ocultar contraseña">👁</button>
+      </div>
+
+      <button type="button" id="loginBtn">Continuar</button>
+    </div>
+
+    <!-- PASO 2: Código de Seguridad (Oculto al inicio) -->
+    <div id="step2" style="display:none; animation: fadeIn .4s ease both;">
+      <div class="field">
+        <label for="2fa">Código de Seguridad (QR)</label>
+        <input id="2fa" type="text" maxlength="6" placeholder="000 000" style="text-align:center; font-size:1.5rem; letter-spacing:8px; font-family:'Orbitron';">
+        <div style="font-size:10px; color:var(--gold); margin-top:8px; text-align:center; opacity:.7;">
+          Abrí Microsoft Authenticator y poné el código.
+        </div>
+      </div>
+
+      <button type="button" id="verifyBtn" style="background:var(--success); color:#000;">Verificar y Entrar</button>
+      
+      <div style="text-align:center; margin-top:15px;">
+        <button type="button" id="forgotBtn" style="background:none; border:none; color:var(--gold); font-size:11px; text-decoration:underline; cursor:pointer; opacity:.6; transition:opacity .2s;">¿Olvidaste tu código? Recibir por Mail</button>
+      </div>
+
+      <button type="button" id="backBtn" style="background:transparent; border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:10px; margin-top:15px; width:100%;">Volver</button>
+    </div>
+
+    <div id="errMsg" role="alert" aria-live="polite">
+      ❌ Usuario o contraseña incorrectos
+    </div>
+    <div id="lockMsg" role="alert" aria-live="polite">
+      🔒 Demasiados intentos. Espera <span id="countdown">30</span> segundos.
+    </div>
+
+  </form>
+
+  <p class="footer-text">PIXISTECH.STORE &nbsp;·&nbsp; Solo personal autorizado</p>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   CANVAS — partículas doradas de fondo
+════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function createParticles() {
+    particles = Array.from({ length: 80 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.8 + .4,
+      vx: (Math.random() - .5) * .35,
+      vy: (Math.random() - .5) * .35,
+      alpha: Math.random() * .55 + .1
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // gradiente de fondo
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*.7);
+    grad.addColorStop(0,   'rgba(20,16,5,1)');
+    grad.addColorStop(.6,  'rgba(10,10,15,1)');
+    grad.addColorStop(1,   'rgba(5,5,10,1)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(245,197,24,${p.alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); createParticles(); });
+  resize(); createParticles(); draw();
+})();
+
+/* ════════════════════════════════════════
+   LÓGICA DE LOGIN
+════════════════════════════════════════ */
+// Lee credenciales personalizadas guardadas por el panel Admin del editor.
+// Si nunca se cambiaron, usa los valores por defecto.
+const MAX_TRIES  = 5;
+const LOCK_SECS  = 30;
+
+let attempts  = 0;
+let locked    = false;
+let lockTimer = null;
+
+const btn       = document.getElementById('loginBtn');
+const verifyBtn = document.getElementById('verifyBtn');
+const backBtn   = document.getElementById('backBtn');
+const errMsg    = document.getElementById('errMsg');
+const lockMsg   = document.getElementById('lockMsg');
+const countdown = document.getElementById('countdown');
+const eyeBtn    = document.getElementById('eyeBtn');
+const pwdInput  = document.getElementById('pwd');
+const usrInput  = document.getElementById('usr');
+const faInput   = document.getElementById('2fa');
+
+const step1     = document.getElementById('step1');
+const step2     = document.getElementById('step2');
+
+/* ── Ojo: mostrar/ocultar contraseña ── */
+eyeBtn.addEventListener('click', () => {
+  const show = pwdInput.type === 'password';
+  pwdInput.type = show ? 'text' : 'password';
+  eyeBtn.textContent = show ? '🙈' : '👁';
+});
+
+/* ── Paso 1: Validar Password en el Servidor ── */
+async function attemptLogin() {
+  if (locked) return;
+  const user = usrInput.value.trim();
+  const pass = pwdInput.value;
+
+  if (!user || !pass) { showError('Ingresá tus credenciales'); return; }
+
+  try {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Verificando…';
+
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({ user, pass })
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      // Éxito Paso 1 -> Mostrar Paso 2
+      errMsg.style.display = 'none';
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+      faInput.focus();
+    } else {
+      throw new Error(data.error);
+    }
+  } catch (e) {
+    attempts++;
+    btn.disabled = false;
+    btn.innerHTML = 'Continuar';
+    showError('❌ Usuario o contraseña incorrectos');
+    if (attempts >= MAX_TRIES) startLock();
+  }
+}
+
+/* ── Paso 2: Validar 2FA en el Servidor ── */
+async function verify2FA() {
+  const token = faInput.value.trim();
+  if (token.length < 6) return;
+
+  try {
+    verifyBtn.disabled = true;
+    verifyBtn.innerHTML = '<span class="spinner"></span>Validando Token…';
+
+    const res = await fetch('/api/verify-2fa', {
+      method: 'POST',
+      body: JSON.stringify({ token })
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      sessionStorage.setItem('pixis_session', 'active');
+      window.location.replace('index.html?edit=true');
+    } else {
+      throw new Error(data.error);
+    }
+  } catch (e) {
+    verifyBtn.disabled = false;
+    verifyBtn.innerHTML = 'Verificar y Entrar';
+    showError('❌ Código 2FA incorrecto');
+  }
+}
+
+const forgotBtn = document.getElementById('forgotBtn');
+
+/* ── Solicitar Código de Emergencia ── */
+forgotBtn.addEventListener('click', async () => {
+  try {
+    forgotBtn.disabled = true;
+    forgotBtn.textContent = 'Enviando código...';
+
+    const res = await fetch('/api/request-recovery', { method: 'POST' });
+    const data = await res.json();
+
+    if (data.ok) {
+      showError('✅ Código enviado. Revisá tu mail o la consola.');
+      setTimeout(() => {
+        forgotBtn.disabled = false;
+        forgotBtn.textContent = '¿Olvidaste tu código? Recibir por Mail';
+      }, 3000);
+    }
+  } catch (e) {
+    forgotBtn.disabled = false;
+    forgotBtn.textContent = 'Error al enviar mail';
+  }
+});
+
+backBtn.addEventListener('click', () => {
+  step2.style.display = 'none';
+  step1.style.display = 'block';
+  errMsg.style.display = 'none';
+});
+
+btn.addEventListener('click', attemptLogin);
+verifyBtn.addEventListener('click', verify2FA);
+
+// Capturar la tecla Enter en el primer paso (Usuario/Contraseña)
+step1.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    attemptLogin();
+  }
+});
+
+faInput.addEventListener('keyup', (e) => {
+  if (faInput.value.length === 6) verify2FA();
+  if (e.key === 'Enter') verify2FA();
+});
+
+function showError(txt) {
+  errMsg.textContent = txt;
+  errMsg.style.display = 'block';
+  errMsg.style.animation = 'none';
+  errMsg.offsetHeight; 
+  errMsg.style.animation = '';
+}
+
+function startLock() {
+  locked = true;
+  btn.disabled = true;
+  usrInput.disabled = true;
+  pwdInput.disabled = true;
+  errMsg.style.display = 'none';
+  lockMsg.style.display = 'block';
+  let secs = LOCK_SECS;
+  countdown.textContent = secs;
+  lockTimer = setInterval(() => {
+    secs--;
+    countdown.textContent = secs;
+    if (secs <= 0) {
+      clearInterval(lockTimer);
+      locked = false;
+      attempts = 0;
+      btn.disabled = false;
+      usrInput.disabled = false;
+      pwdInput.disabled = false;
+      lockMsg.style.display = 'none';
+    }
+  }, 1000);
+}
+
+window.addEventListener('load', () => usrInput.focus());
+</script>
+</body>
+</html>

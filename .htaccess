@@ -1,0 +1,94 @@
+# ================================================================
+#  PIXIS INFORMATICA — Control de Caché para Hostinger
+#  Este archivo le dice al servidor qué puede cachear y qué no.
+# ================================================================
+
+# --- Habilitar mod_expires (caché por tipo de archivo) ---
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imágenes: cachear por 1 año (tienen versión en URL cuando cambian)
+    ExpiresByType image/jpeg          "access plus 1 year"
+    ExpiresByType image/png           "access plus 1 year"
+    ExpiresByType image/gif           "access plus 1 year"
+    ExpiresByType image/webp          "access plus 1 year"
+    ExpiresByType image/svg+xml       "access plus 1 year"
+    ExpiresByType image/x-icon        "access plus 1 year"
+
+    # Fuentes: cachear por 1 año
+    ExpiresByType font/woff           "access plus 1 year"
+    ExpiresByType font/woff2          "access plus 1 year"
+    ExpiresByType font/ttf            "access plus 1 year"
+
+    # CSS y JS: cachear 1 año (el sistema de versiones ?v=XXXX controla la actualización)
+    ExpiresByType text/css            "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+
+    # Archivos JSON de datos: NO cachear nunca (siempre frescos)
+    ExpiresByType application/json    "access plus 0 seconds"
+
+    # HTML: NO cachear (siempre fresco para detectar cambios de versión)
+    ExpiresByType text/html           "access plus 0 seconds"
+</IfModule>
+
+# --- Control de caché por cabeceras HTTP ---
+<IfModule mod_headers.c>
+
+    # index.html y login.html: NUNCA cachear
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
+    # Archivos JSON en /data/: NUNCA cachear
+    <FilesMatch "\.json$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
+    # CSS, JS e Imágenes: cachear 1 año (se versiona con ?v=XXXX)
+    <FilesMatch "\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+</IfModule>
+
+# --- Comprimir respuestas (mejora velocidad de carga) ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Redirigir Robots de Redes Sociales al Mediador PHP (Social SEO) ---
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # =================================================================
+    # REGLA PRIORITARIA: Forzar HTTPS antes de evaluar cualquier bot
+    # =================================================================
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # =================================================================
+    # REGLA 1: Productos (?producto=slug)
+    # =================================================================
+    RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Twitterbot|Discordbot|LinkedInBot|TelegramBot|Slackbot|Googlebot|bingbot) [NC]
+    RewriteCond %{QUERY_STRING} (?:^|&)producto=([^&]+)
+    RewriteRule ^(index\.html)?$ share.php?producto=%1 [L]
+
+    # =================================================================
+    # REGLA 2: Banners (?banner=id)
+    # =================================================================
+    RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Twitterbot|Discordbot|LinkedInBot|TelegramBot|Slackbot|Googlebot|bingbot) [NC]
+    RewriteCond %{QUERY_STRING} (?:^|&)banner=([^&]+)
+    RewriteRule ^(index\.html)?$ share.php?banner=%1 [L]
+
+    # =================================================================
+    # REGLA 3: Categorías (?categoria=id)
+    # =================================================================
+    RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Twitterbot|Discordbot|LinkedInBot|TelegramBot|Slackbot|Googlebot|bingbot) [NC]
+    RewriteCond %{QUERY_STRING} (?:^|&)categoria=([^&]+)
+    RewriteRule ^(index\.html)?$ share.php?categoria=%1 [L]
+
+</IfModule>

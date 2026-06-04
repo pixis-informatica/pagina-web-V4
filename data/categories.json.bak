@@ -1,0 +1,118 @@
+[
+  {
+    "id": "destacados",
+    "name": "Destacados",
+    "icon": "🔥",
+    "active": true
+  },
+  {
+    "id": "nuevos",
+    "name": "Nuevos Ingresos",
+    "icon": "✨"
+  },
+  {
+    "id": "Cables",
+    "name": "Adaptadores & Cables",
+    "icon": "🔌",
+    "active": true,
+    "customIcon": "img/categorias/cat-cables-1780094107377.png"
+  },
+  {
+    "id": "almacenamiento",
+    "name": "Almacenamiento",
+    "icon": "💾",
+    "active": true,
+    "customIcon": "img/categorias/cat-almacenamiento-1780093856104.png"
+  },
+  {
+    "id": "Camara de Seguridad",
+    "name": "Cámara de Seguridad",
+    "icon": "📷",
+    "customIcon": "img/categorias/cat-camara de seguridad-1780093864738.png"
+  },
+  {
+    "id": "Cargadores",
+    "name": "Cargadores",
+    "icon": "⚡",
+    "customIcon": "img/categorias/cat-cargadores-1780093871004.png"
+  },
+  {
+    "id": "fuentes",
+    "name": "Fuentes",
+    "icon": "🔋",
+    "customIcon": "img/categorias/cat-fuentes-1780093881055.png"
+  },
+  {
+    "id": "gabinetes",
+    "name": "Gabinetes",
+    "icon": "🖥️",
+    "customIcon": "img/categorias/cat-gabinetes-1780094099485.png"
+  },
+  {
+    "id": "Herramientas",
+    "name": "Herramientas",
+    "icon": "🔧",
+    "customIcon": "img/categorias/cat-herramientas-1780093899372.png"
+  },
+  {
+    "id": "Memorias Ram",
+    "name": "Memorias RAM",
+    "icon": "🧠",
+    "customIcon": "img/categorias/cat-memorias ram-1780093904353.png"
+  },
+  {
+    "id": "monitores",
+    "name": "Monitores",
+    "icon": "🖥️",
+    "customIcon": "img/categorias/cat-monitores-1780093908371.png"
+  },
+  {
+    "id": "Notebook",
+    "name": "PC y Notebook",
+    "icon": "💻",
+    "customIcon": "img/categorias/cat-notebook-1780093919003.png"
+  },
+  {
+    "id": "Periféricos",
+    "name": "Periféricos",
+    "icon": "🖱️",
+    "customIcon": "img/categorias/cat-periféricos-1780094201230.png"
+  },
+  {
+    "id": "Placas madres",
+    "name": "Placas Madres",
+    "icon": "🔲",
+    "customIcon": "img/categorias/cat-placas madres-1780093952316.png"
+  },
+  {
+    "id": "Placas de video",
+    "name": "Placas de Video",
+    "icon": "🎮",
+    "customIcon": "img/categorias/cat-placas de video-1780093947219.png"
+  },
+  {
+    "id": "Procesadores",
+    "name": "Procesadores",
+    "icon": "⚙️",
+    "customIcon": "img/categorias/cat-procesadores-1780093938114.png"
+  },
+  {
+    "id": "red",
+    "name": "Redes",
+    "icon": "📡",
+    "customIcon": "img/categorias/cat-red-1780093932245.png"
+  },
+  {
+    "id": "refrigeracion",
+    "name": "Refrigeración",
+    "icon": "❄️",
+    "customIcon": "img/categorias/cat-refrigeracion-1780093925928.png"
+  },
+  {
+    "id": "Sillas y Escritorios Gamer",
+    "name": "Sillas y Escritorios Gamer",
+    "icon": "🪑",
+    "active": true,
+    "customIcon": "img/categorias/cat-sillas y escritorios gamer-1780086667519.png"
+  }
+]

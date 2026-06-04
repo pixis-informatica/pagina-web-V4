@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head >
+    <meta charset="UTF-8">
+    <script>
+        // Protección y Persistencia del Editor
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const hasEditParam = params.has('edit');
+            const hasSession = sessionStorage.getItem('pixis_session') === 'active';
+
+            if (hasEditParam && !hasSession) {
+                // Intento de entrar sin login -> ir a login
+                window.location.replace('login.html');
+            } else if (!hasEditParam && hasSession) {
+                // Sesión activa pero se perdió el parámetro -> recuperarlo automáticamente
+                params.set('edit', 'true');
+                window.location.replace(window.location.pathname + '?' + params.toString() + window.location.hash);
+            }
+        })();
+    </script>
+    <title>Pixis Informática | Especialistas en Computadoras Gamer y de Oficina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Metadatos dinámicos para redes sociales (Pixis Inyecta aquí) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pixis Informática">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:title" id="meta-og-title" content="Pixis Informática | Especialistas en Computación">
+    <meta property="og:description" id="meta-og-desc" content="Tienda de computación online en Santiago del Estero. Venta de accesorios gamer, hardware de alto rendimiento y servicio técnico especializado.">
+    <meta property="og:image" id="meta-og-image" content="https://pixistech.store/img/TECH24.png">
+    <meta property="og:url" id="meta-og-url" content="https://pixistech.store">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="meta-twitter-title" content="Pixis Informática | Especialistas en Computación">
+    <meta name="twitter:description" id="meta-twitter-desc" content="Tienda de computación online en Santiago del Estero.">
+    <meta name="twitter:image" id="meta-twitter-image" content="https://pixistech.store/img/TECH24.png">
+    
+    <meta name="description" content="Tienda de computación online en Santiago del Estero. Venta de accesorios gamer, hardware de alto rendimiento y servicio técnico especializado.">
+    <meta name="google-site-verification" content="LRXHYYrAKTCHW292rR5zcKtXTbwqrrrdTsuEQtSS0_c" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=1.4223">
+    <link rel="stylesheet" href="css/lightmode.css?v=1.4223" id="lightmode" disabled>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <a href="https://wa.me/message/EYUUSVNG5HPNF1" class="wsp-float">
+    <i class="fab fa-whatsapp"></i>
+    </a>
+<body class="header" id="top">
+  <!-- HEADER -->
+   <div class="header-top-text">
+    <span>SERVICIO TECNICO ESPECIALIZADO EN COMPUTACION Y MANTENIMIENTO EN CONSOLAS</span>
+</div>
+<header class="main-header">
+    <div class="header-left">
+        <div class="textos-header">
+            <span class="linea1">
+                PC, hardware y servicio técnico 
+                <br>en Santiago del Estero
+            </span>
+        </div>
+
+        <!-- MODO GAMER debajo del slogan (desktop) -->
+        <div class="theme-toggle header-theme-btn" onclick="toggleTheme()" style="cursor: pointer; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); border: 2px solid #b026ff; border-radius: 20px; padding: 5px 12px; width: fit-content; height: auto;">
+            <i id="gamerIcon" class="fas fa-gamepad" style="font-size: 18px; color: #b026ff; margin-right: 7px;"></i>
+            <i id="sunIcon" class="fas fa-sun" style="font-size: 18px; color: #ffd700; margin-right: 7px; display: none;"></i>
+            <span id="themeText" style="font-weight: bold; font-size: 13px; white-space: nowrap;">MODO GAMER</span>
+        </div>
+    </div>
+
+   <div class="header-center">
+        <a href="index.html" onclick="event.preventDefault(); goHome();" class="logo-container" style="cursor: pointer; display: flex; align-items: center; margin-right: 15px; text-decoration: none;" title="Volver al inicio">
+            <img src="img/TECH24.png?v=1" alt="PIXIS Informática" class="logo">
+            <img src="img/PIXIS mascos.png?v=3" alt="Mascota PIXIS" class="mascota">
+        </a>
+
+      <!-- Buscador + Carrito en la misma fila, centrados en el header -->
+      <div class="search-row">
+
+        <div class="search-bar">
+            <input 
+                type="text"
+                id="searchInput"
+                placeholder="Buscar productos (ej: SSD M.2, gabinete ATX, RTX 5060...)">
+            
+            <i class="fas fa-search"></i> 
+        </div>
+
+        <!-- BOTON CARRITO alineado con el buscador -->
+        <label for="toggle-cart" class="cart-icon header-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </label>
+
+      </div>
+
+</div>
+
+    <div class="header-right">
+
+    <div class="header-info">
+
+        <div class="ubicacion">
+            <a href="https://goo.gl/maps/28gwmAhNH5KGakz98"><i class="fas fa-map-marker-alt"></i></a>
+            VISITA NUESTRO LOCAL EN
+            <br>
+            <small>Jujuy 412 Edificio San Antonio 2° piso oficina "B"</small>
+        </div>
+
+        <div class="redes-sociales">
+
+            <small class="redes-title">
+            SEGUINOS EN NUESTRAS REDES
+            </small>
+
+            <div class="redes-iconos">
+                <a href="https://www.tiktok.com/@pixis.informatica?is_from_webapp=1&sender_device=pc"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/pixisinformatica/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100065599325306"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@PIXIS.INFORMATICA"><i class="fab fa-youtube"></i></a>
+            </div>
+
+        </div>
+
+    </div>
+
+        <div class="header-web">
+            <span>WEB ABIERTA</span>
+            <div class="open-text">24/7</div>
+        </div>
+
+
+
+    </div>
+
+</header> 
+
+
+<section class="brands-carousel">
+  <div class="brands-track" id="brandsTrack">
+     <img src="img/logos/msi.png" alt="Productos MSI disponibles en PIXIS Informática Santiago del Estero">
+<img src="img/logos/raptor.png" alt="Fuentes Raptor y componentes disponibles en PIXIS Informática Argentina">
+<img src="img/logos/logitech.png" alt="Periféricos Logitech en venta en PIXIS Informática Santiago del Estero">
+<img src="img/logos/corsair.png" alt="Componentes Corsair para PC gamer en PIXIS Informática">
+<img src="img/logos/nvidia.png" alt="Placas de video Nvidia disponibles en PIXIS Informática Santiago del Estero">
+<img src="img/logos/amd.png" alt="Procesadores AMD en venta en PIXIS Informática Argentina">
+<img src="img/logos/asus.png" alt="Hardware Asus para computadoras en PIXIS Informática">
+<img src="img/logos/patriot.png" alt="Memorias Patriot disponibles en PIXIS Informática Santiago del Estero">
+<img src="img/logos/kelyx.png" alt="Componentes Kelyx disponibles en PIXIS Informática">
+<img src="img/logos/adata.png" alt="Memorias y almacenamiento Adata en PIXIS Informática">
+<img src="img/logos/gigabyte.png" alt="Placas madre y hardware Gigabyte en PIXIS Informática">
+<img src="img/logos/mercusys.png" alt="Equipos de red Mercusys en PIXIS Informática Argentina">
+<img src="img/logos/thermaltake.png" alt="Gabinetes y refrigeración Thermaltake en PIXIS Informática">
+<img src="img/logos/tp link.png" alt="Routers TP-Link disponibles en PIXIS Informática Santiago del Estero">
+<img src="img/logos/razer.png" alt="Periféricos gamer Razer en PIXIS Informática">
+<img src="img/logos/hiksemi.png" alt="Almacenamiento Hiksemi disponible en PIXIS Informática">
+    
+
+  
+  </div>
+  <script>
+const track = document.getElementById("brandsTrack");
+
+// duplicar contenido automáticamente
+track.innerHTML += track.innerHTML;
+</script>
+  
+</section>
+
+
+    <div id="noResults" class="no-resultados">
+        ❌ No se encontraron coincidencias
+    </div>
+    <section id="busquedaSection" style="display:none;">
+    <h2 class="categoria">RESULTADOS</h2>
+    <div class="productos" id="busquedaProductos"></div>
+    </section>
+
+    <!-- Menú de SPA -->
+    <div id="categorias">
+        <button class="btnCategorias" id="btnCategorias"><span>Menú de Productos</span></button>
+        <div class="categorias-nav">
+
+  <div class="categorias-header">
+    <span class="categorias-titulo">CATEGORÍAS</span>
+    <button class="menu-close-btn" onclick="document.getElementById('btnCategorias').click()">✕</button>
+  </div>
+
+ <div class="categorias-lista">
+    <!-- Las categorías se cargarán dinámicamente desde el state (JSON) -->
+</div>
+
+
+</div>
+    </div>
+    <section class="destacados">
+
+    <!-- Carteles Flotantes Info (Flujo Natural Inline Promocional) -->
+    <div class="info-badge">
+        <div style="display: flex; gap: 4px; font-size: 20px; flex-shrink: 0; align-items: center;">
+            <i class="fab fa-cc-visa" style="color: #1a1f71;"></i>
+            <i class="fab fa-cc-mastercard" style="color: #eb001b;"></i>
+            <i class="fab fa-cc-amex" style="color: #002663;"></i>
+            <!-- Mini representacion de Naranja u otros cobros -->
+            <span style="font-size: 10px; font-weight: bold; background: #ff5a00; color: #fff; padding: 1px 3px; border-radius: 3px;">NX</span>
+        </div>
+        <div class="ib-text"><b>Pagá con tarjeta de crédito</b><span>a través de la web</span></div>
+    </div>
+    <a class="info-badge" href="https://maps.app.goo.gl/i6NiNFSDtuFqKvAo6" target="_blank">
+        <i class="fas fa-map-marker-alt" style="color: #4285F4;"></i>
+        <div class="ib-text"><b>Retirá gratis</b><span>desde nuestro local</span></div>
+    </a>
+    <a class="info-badge copy-email">
+    <i class="fas fa-envelope" style="color: #00a1ff;"></i>
+    <div class="ib-text">
+        <b>Consultas</b>
+        <span class="email-text">pixisinformatica.contacto@gmail.com</span>
+    </div>
+    <div id="toast-copy">Correo copiado✔</div>
+</a>
+    <a class="info-badge" href="https://wa.me/message/EYUUSVNG5HPNF1" target="_blank">
+        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+        <div class="ib-text"><b>Comunicate de forma directa</b><span>+54 9 3856 97-0135</span></div>
+    </a>
+  <div class="banner-carousel-outer">
+    <div class="banner-carousel">
+      <div class="banner-track">
+        <!-- Los slides se cargan dinámicamente desde products.json / site.json -->
+      </div>
+    </div>
+    <div class="banner-dots"></div>
+    <!-- BOTONES -->
+    <button class="banner-prev">‹</button>
+    <button class="banner-next">›</button>
+  </div>
+        <h2>🔥 DESTACADOS 🔥</h2>
+    <div class="carousel-wrapper">
+
+  <button class="btn-next"><span>&#8250;</span></button>
+  <button class="btn-prev"><span>&#8249;</span></button>
+
+    <div class="carousel">
+        
+    <div class="productos" id="destacadosTrack">
+        
+           </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // La duplicación del carrusel ya no es necesaria dado que implementaremos arrastre manual.
+    </script>
+</section>
+
+    <!-- CATÁLOGO -->
+    <div id="catalogo-completo" style="display: none;">
+    <section class="Gabinetes"> 
+
+        <h2>PRODUCTOS DISPONIBLES</h2>
+
+        <h3 id="Periféricos" class="categoria pulsante">PERIFÉRICOS</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+
+            <!-- PRODUCTO -->
+            </div>
+       
+       
+        <h3 id="almacenamiento" class="categoria pulsante">ALMACENAMIENTOS</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+            <!-- Los productos de esta sección se cargan dinámicamente desde products.json -->
+
+        </div>    
+
+
+       <h3 id="gabinetes" class="categoria pulsante">GABINETES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        <button class="btn-filtro" data-filter="ITX/MATX/ATX">Gabinetes ITX/MATX/ATX</button>
+        <button class="btn-filtro" data-filter="ITX/MATX">Gabinetes ITX/MATX</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">    
+            </div>
+
+
+        <h3 id="Procesadores" class="categoria">PROCESADORES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+            <!-- Los productos de esta sección se cargan dinámicamente desde products.json -->
+        </div>
+
+        
+        <h3 id="Placas madres" class="categoria pulsante">PLACAS MADRES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+            </div>
+
+
+        <h3 id="Memorias Ram" class=" categoria pulsante">MEMORIAS RAM</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div> 
+        <div class="productos">
+            </div> 
+        
+        
+
+        <h3 id="fuentes" class="categoria pulsante">FUENTES</h3>
+         <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+            </div>
+
+            
+        <h3 id="refrigeracion" class="categoria pulsante">REFRIGERACION</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">  
+             </div>
+
+
+        <h3 id="monitores" class="categoria pulsante">MONITORES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">  
+           </div>
+
+
+        <h3 id="Placas de video" class="categoria pulsante">PLACAS DE VIDEO</h3> 
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos"> 
+           </div>
+
+        
+        <h3 id="red" class="categoria pulsante">CONECTIVIDAD</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos"> 
+            </div>
+
+
+        <h3 id="Sillas y Escritorios Gamer" class="categoria pulsante">SILLAS Y ESCRITORIOS</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        <button class="btn-filtro" data-filter="Diseño gamer">Diseño gamer</button>
+        <button class="btn-filtro" data-filter="Diseño Ergonomico">Diseño Ergonomicas</button>
+        <button class="btn-filtro" data-filter="Escritorio">Escritorios</button>
+        </div>
+        </div>
+        </div>
+    <div class="productos">
+        </div>
+
+        <h3 id="Cables" class="categoria pulsante">CABLES & ADAPTADORES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+        </div>
+
+        <h3 id="Herramientas" class="categoria pulsante">HERRAMIENTAS</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+    <div class="productos">
+       </div>
+
+
+    <h3 id="Cargadores" class="categoria">CARGADORES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+    <div class="productos">
+     
+        </div>
+
+       
+       
+        <h3 id="Notebook" class="categoria pulsante">PC, COMBOS Y PORTATILES</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+         </div>
+
+        <h3 id="Camara de Seguridad" class="categoria pulsante">CAMARA DE SEGURIDAD</h3>
+        <div class="categoria-ui">
+        <div class="filtros-panel">
+        <span class="filtro-titulo">Ordenar por:</span>
+        <label class="switch-precio">
+        <input type="checkbox" class="toggle-precio">
+        <span class="slider"></span>
+        <span class="switch-text">Precio menor a mayor</span>
+        </label>
+        <div class="filtros-categoria" data-static-placeholder="true">
+        <button class="btn-filtro activo" data-filter="all">Todos</button>
+        <button class="btn-filtro" data-filter="Camara de seguridad">Camara de seguridad</button>
+        </div>
+        </div>
+        </div>
+        <div class="productos">
+           </div>
+     
+
+</section>
+    </div> <!-- END CATALAGO COMPLETO -->
+
+    <!-- SECCIÓN NUEVOS INGRESOS (SOLO FANPAGE) -->
+    <section class="nuevos-ingresos" id="nuevosIngresosSection">
+    <div class="banner-carousel-outer">
+      <div class="banner-carousel">
+        <div class="banner-track">
+          <!-- Los slides se cargan dinámicamente desde products.json / site.json -->
+        </div>
+      </div>
+      <div class="banner-dots"></div>
+      <!-- BOTONES -->
+      <button class="banner-prev">‹</button>
+      <button class="banner-next">›</button>
+    </div>
+        <h2 class="nuevos-ingreso">🔥NUEVOS INGRESOS🔥</h2>
+        <div class="carousel-wrapper">
+            <button class="btn-next"><span>&#8250;</span></button>
+            <button class="btn-prev"><span>&#8249;</span></button>
+        <div class="carousel">
+            <div class="productos" id="nuevosIngresosTrack">
+
+                </div>
+        </div>
+        </div>
+    </section>
+
+<!-- Contenedor para productos dinámicos del JSON -->
+<div id="dynamic-catalog-container"></div>
+
+
+    <!-- SECCIÓN REELS (SHORTS) -->
+    <section class="nuevos-ingresos reels-section" id="reelsSection">
+        <div class="section-title-row">
+            <h2 class="neon-title">🔥NUESTROS REELS🔥</h2>
+            <a href="https://www.youtube.com/@PIXIS.INFORMATICA/shorts" target="_blank" class="yt-button">Ir a reels de productos</a>
+        </div>
+        <div class="carousel">
+            <div class="productos">
+                <!-- 5 Shorts (como enlaces con thumbnail) -->
+                <a href="https://www.youtube.com/shorts/mccm3ivIs_g" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/mccm3ivIs_g/hqdefault.jpg" alt="Short YouTube 1">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/FutZdWHQZGU" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/FutZdWHQZGU/hqdefault.jpg" alt="Short YouTube 2">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/mXgmT3VHN8w" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/mXgmT3VHN8w/hqdefault.jpg" alt="Short YouTube 3">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/xADClRr11Zg" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/xADClRr11Zg/hqdefault.jpg" alt="Short YouTube 4">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/enbM-g2FDA4" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/enbM-g2FDA4/hqdefault.jpg" alt="Short YouTube 5">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/8HIC09VsqSg" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/8HIC09VsqSg/hqdefault.jpg" alt="Short YouTube 6">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/Va72GXwDCJQ" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/Va72GXwDCJQ/hqdefault.jpg" alt="Short YouTube 7">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/s5IzZCbNOSU" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/s5IzZCbNOSU/hqdefault.jpg" alt="Short YouTube 8">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/k1EiKr2mong" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/k1EiKr2mong/hqdefault.jpg" alt="Short YouTube 9">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/shorts/zMPwwHP7KJA" target="_blank" class="short-card pulsante2">
+                    <img src="https://img.youtube.com/vi/zMPwwHP7KJA/hqdefault.jpg" alt="Short YouTube 10">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN APRENDE CON NOSOTROS (VIDEOS 16:9) -->
+    <section class="nuevos-ingresos videos-section" id="aprendeSection">
+        <div class="section-title-row">
+            <h2 class="neon-title">🔥APRENDE CON NOSOTROS🔥</h2>
+            <a href="https://www.youtube.com/@PIXIS.INFORMATICA" target="_blank" class="yt-button">Unite a nuestro canal y aprende con nosotros</a>
+        </div>
+        <div class="carousel">
+            <div class="productos">
+                <!-- 3 Videos (como enlaces con thumbnail) -->
+                <a href="https://www.youtube.com/watch?v=c05um5sca6U" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/c05um5sca6U/hqdefault.jpg" alt="Video YouTube 1">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=ya6CQZQ16LA" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/ya6CQZQ16LA/hqdefault.jpg" alt="Video YouTube 2">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=ETbF3492Hps" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/ETbF3492Hps/hqdefault.jpg" alt="Video YouTube 3">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=g8X4RCxeqvY" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/g8X4RCxeqvY/hqdefault.jpg" alt="Video YouTube 4">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=BWup0n9fS8Y" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/BWup0n9fS8Y/hqdefault.jpg" alt="Video YouTube 5">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=gZ-wXPUasYY" target="_blank" class="video-card pulsante2">
+                    <img src="https://img.youtube.com/vi/gZ-wXPUasYY/hqdefault.jpg" alt="Video YouTube 6">
+                    <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<div class="footer-follow">
+    <span>¡ SEGUINOS !</span> <a href="https://goo.gl/maps/28gwmAhNH5KGakz98"
+   target="_blank"
+   class="btn-ubicacion"
+   aria-label="Ubicación de PIXIS INFORMÁTICA">
+
+    <svg viewBox="0 0 24 24" class="icono-ubicacion">
+        <path d="M12 22s7-6.2 7-12a7-7 0 1 0-14 0c0 5.8 7 12 7 12z"
+              fill="red"/>
+        <circle cx="12" cy="10" r="3" fill="white"/>
+    </svg>
+
+</a>
+</div>
+
+<div class="redes-sociales2">
+    <a href="https://www.facebook.com/p/PIXIS-Informatica-100065599325306/" class="red facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/pixisinformatica/" class="red instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@pixis.informatica?is_from_webapp=1&sender_device=pc" class="red tiktok"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.youtube.com/@PIXIS.INFORMATICA" class="red Youtube"><i class="fab fa-youtube"></i></a>
+</div>
+ <footer class="footer">
+    <div class="footer-extra">
+        Quiénes somos
+<br>
+Pixis Informática es una tienda de computación y electrónica fundada en 2015 en Santiago del Estero Capital, Argentina.
+<br>
+Ofrecemos PCs gamer, de oficina y hogareñas, además de insumos, repuestos y servicio técnico especializado en portátiles multimarcas.
+<br>
+Contamos con una gran comunidad de seguidores y clientes, reconocidos en nuestra provincia y presentes en Instagram, Facebook, WhatsApp, Marketplace, YouTube y TikTok.
+<br>
+Más que una tienda, somos tu aliado tecnológico en Santiago del Estero a todo el país.
+</div>
+<div class="footer-box">
+    <div class="footer-box-content">
+        <p class="footer-box-text">
+            IMPORTANTE: LAS IMAGENES DE LOS PRODUCTOS SON SOLO DE MODO ILUSTRATIVO Y PUEDEN DIFERIR <br> 
+            DEL ARTICULO EN STOCK. LOS PRECIOS INDICADOS TIENEN IVA INCLUIDO<br> 
+            Y PUEDEN SUFRIR VARIACIONES SIN PREVIO AVISO. <br>
+            DISPONIBILIDAD SUJETA A STOCK<br>
+        </p>
+
+        <!-- espacio reservado para data fiscal -->
+        <div class="footer-box-fiscal">
+            <!-- AQUÍ VA LA DATA FISCAL MÁS ADELANTE -->
+        </div>
+    </div>
+</div>
+        <div class="footer-copy">Copyright © PIXIS INFORMÁTICA 2026</div>
+       
+    </footer>
+    <div id="modalDescuentoEfectivo" class="modal-efectivo">
+
+  <div class="modal-efectivo-box">
+
+    <span class="cerrar-modal-efectivo">&times;</span>
+
+    <h3>💵 Pago en efectivo</h3>
+
+    <p>
+      Pagando <strong>en nuestro local en efectivo</strong> obtenés
+    </p>
+
+    <div class="efectivo-descuento">
+      <span>MEJOR PRECIO</span>
+    </div>
+
+    <p>
+      Este PRECIO se reflejará en el <strong>presupuesto PDF</strong>
+      que se genera al finalizar el pedido.
+    </p>
+
+  </div>
+
+</div>
+    <div id="cart-toast">Se agregó al carrito</div>
+    <a href="#top" class="btn-top" id="btnHome">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<input type="checkbox" id="toggle-cart" hidden>
+
+<div class="cart-overlay"></div>
+
+<div class="cart-modal">
+
+  <div class="cart-header">
+    <h3>Tu carrito</h3>
+    <label for="toggle-cart" class="close-cart">✕</label>
+  </div>
+
+  <div class="cart-body">
+    <div class="cart-items"></div>
+  </div>
+
+  <div class="cart-footer">
+     
+    <!-- ENTREGA -->
+    <div class="cart-section">
+      <h4>Modo de entrega</h4>
+      <label><input type="radio" id="retiroLocal" name="entrega"> Retiro en el local</label>
+      <label><input type="radio" id="envioDomicilio" name="entrega"> Envío a domicilio (a consultar costo)</label>
+    </div>
+    <div id="avisoEnvioPago" class="aviso-envio-pago">
+🚚 Los envíos se realizan únicamente mediante transferencia o tarjeta.<br>
+<strong>No se acepta efectivo para envíos.</strong>
+</div>
+    <!-- DATOS ENVÍO -->
+    <div class="cart-section">
+      <input type="text" id="clienteNombre" placeholder="Nombre completo">
+      <input type="text" id="clienteProvincia" placeholder="Provincia">
+      <input type="text" id="clienteLocalidad" placeholder="Localidad">
+      <input type="text" id="clienteDireccion" placeholder="Dirección">
+    </div>
+
+    <!-- PAGO -->
+    <div class="cart-section">
+      <h4>Forma de pago</h4>
+      <label><input type="radio" id="pagoEfectivo" name="pago"> Efectivo (mejor precio abonando en nuestro local)</label>
+      <label><input type="radio" id="pagoTransferencia" name="pago"> Transferencia</label>
+      <label>
+        <input type="radio" name="pago" id="pagoTarjetaVisual">
+        Tarjeta de crédito
+      </label>
+
+      <select id="selectCuotas">
+        <option value="0">Seleccionar cuotas</option>
+        <option value="1">1 cuota </option>
+        <option value="3">3 cuotas</option>
+        <option value="6">6 cuotas</option>
+        <option value="9">9 cuotas</option>
+        <option value="12">12 cuotas</option>
+      </select>
+
+      <div id="cuotasPreviewCarrito"></div>
+    </div>
+     <div class="cart-total">
+      <span>Total</span>
+      <strong>$0</strong>
+    </div>
+    <div class="cart-cuotas-info"></div>
+    <div id="transferenciaInfo" class="transferencia-info">
+
+En caso de abonar por adelantado: unica cuenta de cobro:<br><br>
+
+<strong>Alias:</strong> pixis.informatica
+<button class="btn-copiar" data-copy="pixis.informatica">
+Copiar Alias
+</button>
+<br><br>
+
+<strong>CBU:</strong> 0000003100061346835943
+<button class="btn-copiar" data-copy="0000003100061346835943">
+Copiar CBU
+</button>
+<br><br>
+
+<strong>Titular:</strong> Maldonado Pablo Alejandro
+<br><br>
+
+quedará igualmente pendiente de confirmación de stock y acreditación del pago.
+<br><br>
+
+(PORFAVOR COMPARTIR EL COMPROBANTE DE PAGO UNA VEZ REALIZADA ESTA ACCION)
+
+</div>
+<div class="cart-terminos">
+
+<label class="terminos-check">
+
+<input type="checkbox" id="aceptaTerminos">
+
+<span>
+He leído y acepto los 
+<button type="button" id="btnAbrirTerminos">
+Términos y condiciones
+</button>
+</span>
+
+</label>
+
+</div>
+    <button class="btn-finish">Finalizar compra</button>
+    <button id="btn-clear-cart">Vaciar carrito</button>
+
+  </div>
+
+</div>
+<div class="modal-terminos" id="modalTerminos">
+
+<div class="terminos-contenido">
+
+<button class="cerrar-terminos" id="cerrarTerminos">✕</button>
+
+<h3>Términos y Condiciones</h3>
+
+<div class="terminos-texto">
+
+<p><strong>Condiciones de la Oferta y Venta – Pixis Informática</strong></p>
+
+<p><strong>Duración de la Oferta</strong></p>
+
+<p>
+Los precios están sujetos al tipo de cambio.<br>
+Pueden modificarse sin previo aviso.
+</p>
+
+<p><strong>Confirmación de Stock</strong></p>
+
+<p>
+Los presupuestos solo podrán abonarse una vez confirmado el stock disponible.
+</p>
+
+<p><strong>Pago Anticipado sin Confirmar Stock</strong></p>
+
+<p>
+No se recomienda realizar pagos sin antes confirmar la disponibilidad de stock.
+</p>
+
+<p>
+Si se abona el producto luego de realizar el pedido sin confirmar stock, y el pago se efectúa mediante nuestro único canal de cobro:
+</p>
+
+<p>
+Alias: pixis.informatica<br>
+CBU: 0000003100061346835943<br>
+Titular de cuenta: Maldonado Pablo Alejandro
+</p>
+
+<p>
+quedará igualmente pendiente de confirmación de stock y acreditación del pago.
+</p>
+
+<p>
+En caso de disponibilidad, se despachará normalmente, ya sea retirando del local o mediante envío a domicilio.
+</p>
+
+<p>
+Los envíos a domicilio implican gastos adicionales a cargo del cliente.
+</p>
+
+<p>
+En caso contrario, se reintegrará el 100% del monto abonado por anticipado.
+</p>
+
+<p>
+Ningún pedido se reserva ni se entrega sin antes confirmarse la acreditación del pago, cualquiera sea la opción elegida.
+</p>
+
+<p><strong>Armado de Computadoras</strong></p>
+
+<p>
+Es obligatorio el anticipo del 100% antes de iniciar la producción.
+</p>
+
+<p><strong>Devoluciones</strong></p>
+
+<p>
+Una vez entregado el producto o ejecutado el servicio, no se aceptan devoluciones.
+</p>
+
+<p><strong>6. Garantía de Productos</strong></p>
+
+<ul>
+
+<li>Todo producto cuenta con garantía por el tiempo indicado en el ticket o factura de compra.</li>
+
+<li>Sin ticket en mano no se podrá cubrir la garantía, sin excepciones.</li>
+
+<li>La garantía aplica únicamente a fallos de fábrica.</li>
+
+<li>Queda excluida en casos de daños físicos, mala manipulación, pines de carga rotos o descomposición por mal uso.</li>
+
+<li>El producto será reemplazado de forma inmediata solo si se presenta en las mismas condiciones de entrega, conservando su envoltorio original.</li>
+
+<li>Todos los cambios por garantía se realizan exclusivamente en nuestro local, para corroborar la falla.</li>
+
+</ul>
+
+<p><strong>6.A Cambios Directos por Garantía</strong></p>
+
+<ul>
+
+<li>En hardware y periféricos seleccionados, la garantía para cambio directo es de 72 horas corridas, aplicable únicamente para clientes de Santiago del Estero Capital y La Banda.</li>
+
+<li>Para productos enviados al interior de la provincia o del país, el plazo de garantía para cambio directo es de 10 días corridos.</li>
+
+<li>Pasados estos plazos, la garantía será gestionada por el fabricante/proveedor, quienes evaluarán el producto y determinarán la cobertura.</li>
+
+<li>Los costos de envío hacia la garantía del fabricante corren por cuenta del cliente.</li>
+
+</ul>
+
+<p><strong>6.B Tiempo de Garantía</strong></p>
+
+<ul>
+
+<li>El tiempo de garantía de cada producto se encuentra indicado en la factura de compra.</li>
+
+<li>En compras con varios artículos, la factura detallará el tiempo de garantía de cada uno.</li>
+
+<li>Es requisito conservar caja, empaques, manuales, etiquetas y accesorios para realizar el trámite de garantía.</li>
+
+<li>Si el fabricante ofrece un tiempo mayor de garantía, una vez vencido el plazo otorgado por Pixis Informática, el cliente deberá gestionar directamente con la marca.</li>
+
+<li>Pixis Informática no tiene responsabilidad alguna sobre esa gestión ni su resolución.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="search-bubble">
+  <svg class="search-icon" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7" stroke="black" stroke-width="2" fill="none"/>
+    <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+
+  <input type="text" id="searchBubbleInput" placeholder="Buscar..." />
+</div>
+<!-- JS -->
+
+<script>
+const btnHome = document.getElementById('btnHome');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        btnHome.classList.add('visible');
+    } else {
+        btnHome.classList.remove('visible');
+    }
+});
+</script>
+    <div class="modal-product" id="modalProduct">
+    <div class="modal-overlay"></div>
+
+    <div class="modal-content">
+    <button class="modal-close">&times;</button>
+
+    <div class="modal-grid">
+
+        <!-- GALERÍA -->
+        <div class="modal-gallery">
+
+        <div class="modal-thumbs" id="modalThumbs"></div>
+
+        <div class="modal-img-zoom" id="modalZoom">
+            <img id="modalImg" src="" alt="Producto">
+        </div>
+
+        </div>
+
+        <!-- INFO -->
+        <div class="modal-info">
+
+    <h3 id="modalTitle" style="display:inline-block; margin-right:10px;"></h3>
+    <button id="btnShareLink" class="link-producto" title="Copiar link del producto">
+  <i class="fas fa-share-alt"></i>
+  <span>Copartir link</span>
+</button>
+    <button class="btn-toggle-desc" id="btnToggleDesc" style="margin-top:10px;">
+    + Más detalles
+    </button>
+
+    <div id="modalDesc" class="modal-desc"></div>
+
+    <!-- =========================
+        BLOQUE PRECIOS 
+    ========================== -->
+    <div class="modal-precios">
+
+        <div class="precio-contado">
+        <span>Precio transferencia</span>
+        <strong id="precioContado"></strong>
+        </div>
+
+        <div class="precio-local">
+        <span>Abonando en efectivo en nuestro local</span>
+        <strong id="precioLocal"></strong>
+        </div>
+
+        <div class="precio-lista">
+        <div>
+            <span>Otros medios de pago </span>
+            <p class="preciolista-text"> hasta 6 cuotas sin interes </p>    
+            <strong id="precioLista"></strong>
+        </div>
+        <button class="btn-ver-cuotas" id="btnVerCuotas">
+            Ver cuotas
+        </button>
+        </div>
+
+        <div class="logos-tarjetas">
+        <img src="img/logos/mastercard.png" alt="Mastercard">
+        <img src="img/logos/visa.png" alt="Visa">
+        <img src="img/logos/naranja.png" alt="Naranja X">
+        <img src="img/logos/mercadopago.png" alt="mercado">
+        <img src="img/logos/logo cabal.png" alt="cabal">
+        <img src="img/logos/logo american express.png" alt="american">
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+        INFORMACIÓN MEDIOS DE PAGO
+    ========================== -->
+    
+    <!-- BOTONES PERSONALIZADOS -->
+    <div id="modalCustomButtons" style="display:flex; flex-direction:column; gap:10px; margin-bottom:10px;"></div>
+
+    <button class="btn-add-cart" id="btnAddToCart">
+    🛒 Agregar al carrito
+    </button>
+    <!-- BOTONES -->
+    <button class="btn-review" id="btnReview">Review</button>
+    <a href="https://wa.me/message/EYUUSVNG5HPNF1" class="btn-wsp">
+        Consultar
+    </a>
+<div class="modal-pagos">
+        <p class="pagos-info">
+        💳 También aceptamos tarjetas de crédito nacionales 
+        (Naranja X, Visa y Mastercard bancarizadas).
+        <br><br>
+
+        • Única financiera: <strong>Sucrédito</strong>
+        <img src="img/logos/sucredito.png" 
+            alt="Sucredito" 
+            class="logo-subcredito">
+        (1 pago)
+        <br>
+        • No aceptamos Banco Santiago ni Banco Sol ☺️
+        </p>
+    </div>
+    </div>
+    <div class="modal-cuotas-detalle" id="modalCuotasDetalle">
+    <div class="cuotas-content">
+        <span class="cerrar-cuotas" id="cerrarCuotas">✕</span>
+        <div class="logos-tarjetas">
+        <img src="img/logos/mastercard.png" alt="Mastercard">
+        <img src="img/logos/visa.png" alt="Visa">
+        <img src="img/logos/naranja.png" alt="Naranja X">
+        <img src="img/logos/mercadopago.png" alt="mercadopago">
+        <img src="img/logos/logo cabal.png" alt="cabal">
+        <img src="img/logos/logo american express.png" alt="american">
+        </div>
+        <h1>MERCADO PAGO</h1>
+        <div class="cabecera-cuotas">
+    <span>Cuotas</span>
+    <span>Valor cuota</span>
+    <span>Precio final</span>
+    </div>
+
+    <div id="listaCuotas"></div>
+    </div>
+    </div>
+    </div>
+
+</div>
+<script>
+// Apertura rápida instantánea de Links Compartidos (Skeleton Load)
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.has('producto')){
+    const modal = document.getElementById('modalProduct');
+    if(modal){
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      const title = document.getElementById('modalTitle');
+      if(title) title.innerHTML = '<span style="opacity:0.6; font-size:0.9em; font-weight:normal;"><i class="fas fa-spinner fa-spin"></i> Cargando información del producto...</span>';
+    }
+  }
+})();
+</script>
+<script src="js/versionalizador.js?v=1.4223"></script>
+
+
+</body>
+</html>
