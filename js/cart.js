@@ -929,7 +929,7 @@ function actualizarPreciosModal(precioBase, precioLocalRaw) {
   const contado = precioNumerico;
   const local = parseFloat(precioLocalRaw);
 
-  const lista = precioNumerico * (tasasCuotas[1] || 1);
+  const lista = precioNumerico * (tasasCuotas[6] || 1.31);
 
   document.getElementById("precioContado").textContent =
     (!isNaN(contado) ? contado : 0).toLocaleString("es-AR", { style: "currency", currency: "ARS" });

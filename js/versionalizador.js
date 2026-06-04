@@ -37,7 +37,8 @@
       try {
         var urlObj = new URL(url, window.location.href);
         urlObj.searchParams.set('v', window.PIXIS_VERSION);
-        urlObj.searchParams.delete('_');
+        // Mantener timestamp único por carga para evitar caché de CDN/proxy en Hostinger
+        urlObj.searchParams.set('_', window._PIXIS_DATA_LOAD_ID || Date.now());
         finalUrl = urlObj.toString();
       } catch (e) {
         var baseUrl = url.split('?')[0];
@@ -57,6 +58,9 @@
     };
 
     window._originalFetch = window.fetch;
+    // Timestamp único por carga de página: garantiza URLs frescas en cada visita
+    // pero constante dentro de la misma carga para que la deduplicación funcione
+    window._PIXIS_DATA_LOAD_ID = Date.now();
     var inFlightFetches = {};
 
     window.fetch = function () {
@@ -75,7 +79,8 @@
           try {
             var urlObj = new URL(url, window.location.href);
             urlObj.searchParams.set('v', window.PIXIS_VERSION);
-            urlObj.searchParams.delete('_');
+            // Timestamp único por carga para evitar caché de CDN/proxy en Hostinger
+            urlObj.searchParams.set('_', window._PIXIS_DATA_LOAD_ID);
             finalUrl = urlObj.toString();
           } catch(e) {
              finalUrl = url;
