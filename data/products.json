@@ -1296,7 +1296,7 @@
     "category3": "destacados",
     "gallery": "img\\productos\\FUENTE RAPTOR 500W SILVER BLACK\\FUENTE RAPTOR 500W SILVER BLACK.png,img\\productos\\FUENTE RAPTOR 500W SILVER BLACK\\000000000041825672920RENDE-PRODUCTO-1--1-_800x800.jpg,img\\productos\\FUENTE RAPTOR 500W SILVER BLACK\\0000000000418256000173067RENDE-PRODUCTO-1--1---2-_800x800.jpg,img\\productos\\FUENTE RAPTOR 500W SILVER BLACK\\0000000000418256000273068RENDE-PRODUCTO-1--1---1-_800x800.jpg",
     "excludeFromExport": false,
-    "proximoIngreso": true
+    "proximoIngreso": false
   },
   {
     "img": "img\\productos\\raptor 650w 80plus bronze.png, img\\productos\\Fuente Raptor Volt 650W 80 Plus Bronze (7190)\\Fuente Raptor Volt 650W 80 Plus Bronze 03 (1).jpg, img\\productos\\Fuente Raptor Volt 650W 80 Plus Bronze (7190)\\Fuente Raptor Volt 650W 80 Plus Bronze 03.jpg, img\\productos\\Fuente Raptor Volt 650W 80 Plus Bronze (7190)\\Fuente Raptor Volt 650W 80 Plus Bronze 01.jpg, img\\productos\\Fuente Raptor Volt 650W 80 Plus Bronze (7190)\\Fuente Raptor Volt 650W 80 Plus Bronze 02.jpg",
@@ -2351,7 +2351,7 @@
   },
   {
     "img": "img/productos/Asus a520m-K.png",
-    "desc": "- 🔌 Socket AMD AM4: Listo para procesadores de escritorio Ryzen��� 5000 Series / 4000 G-Series / 3000 Series\n- 🌬️ Enfriamiento completo: Disipador de Chipset y Fan Xpert\n- ⚡ Conectividad ultrarrápida: Compatibilidad con M.2, Ethernet de 1 Gb, USB 3.2 Gen 2 tipo A\n- 🛡️ 5X Protection III: Múltiples protecciones de hardware para la protección integral del sistema",
+    "desc": "- 🔌 Socket AMD AM4: Listo para procesadores de escritorio Ryzen™ 5000 Series / 4000 G-Series / 3000 Series\n- 🌬️ Enfriamiento completo: Disipador de Chipset y Fan Xpert\n- ⚡ Conectividad ultrarrápida: Compatibilidad con M.2, Ethernet de 1 Gb, USB 3.2 Gen 2 tipo A\n- 🛡️ 5X Protection III: Múltiples protecciones de hardware para la protección integral del sistema",
     "priceVisible": "$92.000",
     "subcategoria": "AM4",
     "title": "Motherboard Prime a520m-K",
