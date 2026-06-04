@@ -31,18 +31,18 @@ window.PixisState = {
     if (!url || url.startsWith('data:') || url.startsWith('blob:')) return url;
 
     // EXCEPCIÓN: No optimizar banners ni imágenes del carrusel para mantener máxima nitidez
-    const isBanner = url.toLowerCase().includes('carrusel') || 
-                     url.toLowerCase().includes('banner') || 
-                     url.toLowerCase().includes('img/des/');
+    const isBanner = url.toLowerCase().includes('carrusel') ||
+      url.toLowerCase().includes('banner') ||
+      url.toLowerCase().includes('img/des/');
     if (isBanner) return url;
 
     // Evitar optimizar en localhost o entornos locales (el proxy no puede acceder a estos archivos)
-    if (window.location.hostname === 'localhost' || 
-        window.location.hostname === '127.0.0.1' || 
-        window.location.hostname.startsWith('192.168.')) {
+    if (window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.startsWith('192.168.')) {
       return url;
     }
-    
+
     // Si ya está optimizada, no re-procesar
     if (url.includes('images.weserv.nl')) return url;
 
@@ -73,11 +73,11 @@ window.PixisState = {
       fetch('/data/ui.json?_=' + ts, nocache).then(r => r.json()).catch(() => ({}))
     ]);
     this.state = { site, products, categories, ui };
-    
+
     // Asegurar que existan las estructuras básicas
     if (!this.state.site.carouselTop) this.state.site.carouselTop = this.state.site.carousel || [];
     if (!this.state.site.carouselBottom) this.state.site.carouselBottom = [];
-    
+
     console.log('[PixisState] Estado cargado ✓', {
       products: products.length,
       categories: categories.length,
@@ -95,10 +95,10 @@ window.PixisState = {
     }
 
     const files = [
-      { name: 'site.json',       data: this.state.site       },
-      { name: 'products.json',   data: this.state.products   },
+      { name: 'site.json', data: this.state.site },
+      { name: 'products.json', data: this.state.products },
       { name: 'categories.json', data: this.state.categories },
-      { name: 'ui.json',         data: this.state.ui         }
+      { name: 'ui.json', data: this.state.ui }
     ];
 
     const results = await Promise.allSettled(
@@ -137,7 +137,7 @@ window.PixisState = {
   async undo() {
     if (this.history.length === 0) return false;
     const prevState = this.history.pop();
-    
+
     // Actualizamos el contenido manteniendo la referencia para que PixisEditor.data no se desincronice
     this.state.site = prevState.site;
     this.state.products = prevState.products;
@@ -251,7 +251,7 @@ window.PixisState = {
     if (!entry) return false;
 
     manifest = manifest.filter(m => m.id != id);
-    
+
     // Actualizar manifiesto
     await fetch(`/api/save-json?file=data/backups/manifest.json`, {
       method: 'POST',
@@ -273,7 +273,7 @@ window.PixisState = {
       Object.entries(ui.texts).forEach(([dataId, data]) => {
         let el = document.querySelector(`[data-pixis-id="${dataId}"]`);
         if (!el) {
-          try { el = document.querySelector(dataId); } catch(e) {}
+          try { el = document.querySelector(dataId); } catch (e) { }
         }
         if (el) {
           // Evitar sobrescribir elementos funcionales (como el botón de modo gamer)
@@ -297,7 +297,7 @@ window.PixisState = {
       Object.entries(ui.images).forEach(([dataId, val]) => {
         let el = document.querySelector(`[data-pixis-id="${dataId}"]`);
         if (!el) {
-          try { el = document.querySelector(dataId); } catch(e) {}
+          try { el = document.querySelector(dataId); } catch (e) { }
         }
         if (el && el.tagName === 'IMG') {
           const src = val.src || val;
@@ -311,9 +311,9 @@ window.PixisState = {
           if (val.href) {
             let aParent = el.closest('a');
             if (!aParent) {
-               aParent = document.createElement('a');
-               el.parentNode.insertBefore(aParent, el);
-               aParent.appendChild(el);
+              aParent = document.createElement('a');
+              el.parentNode.insertBefore(aParent, el);
+              aParent.appendChild(el);
             }
             aParent.href = val.href;
             aParent.removeAttribute('onclick'); // Remover comportamientos viejos
@@ -372,7 +372,7 @@ window.PixisState = {
             if (btn) { btn.dataset.priceLocal = val; btn.dataset.priceOnline = val; }
             card.dataset.cashPrice = val;
           }
-          
+
           // Actualización visual del precio (Prioridad Precio Especial)
           const finalVisiblePrice = data.cashPrice || data.priceLocal || (data.priceNum ? data.priceNum : (data.price ? data.price.replace(/[$. ]/g, '') : null));
           if (finalVisiblePrice) {
@@ -423,15 +423,15 @@ window.PixisState = {
               const badge = document.createElement('span');
               badge.className = 'card-badge-proximamente';
               badge.textContent = 'PRÓXIMAMENTE';
-              
+
               const title = document.createElement('div');
               title.className = 'card-gold-promo-title';
               title.textContent = '¡COMPRA EL TUYO AHORA!';
-              
+
               const subtitle = document.createElement('div');
               subtitle.className = 'card-gold-promo-subtitle';
               subtitle.textContent = 'Sé de los primeros en tenerlo';
-              
+
               card.prepend(subtitle);
               card.prepend(title);
               card.prepend(badge);
@@ -470,10 +470,10 @@ window.PixisState = {
       Object.entries(ui.sections).forEach(([id, styles]) => {
         const sec = document.getElementById(id) || document.querySelector(`[data-pixis-id="${id}"]`);
         if (!sec) return;
-        if (styles.paddingTop)       sec.style.paddingTop       = styles.paddingTop;
-        if (styles.paddingBottom)    sec.style.paddingBottom    = styles.paddingBottom;
-        if (styles.backgroundColor)  sec.style.backgroundColor  = styles.backgroundColor;
-        if (styles.display !== undefined) sec.style.display     = styles.display;
+        if (styles.paddingTop) sec.style.paddingTop = styles.paddingTop;
+        if (styles.paddingBottom) sec.style.paddingBottom = styles.paddingBottom;
+        if (styles.backgroundColor) sec.style.backgroundColor = styles.backgroundColor;
+        if (styles.display !== undefined) sec.style.display = styles.display;
       });
     }
 
@@ -486,7 +486,7 @@ window.PixisState = {
       const addr = document.querySelector('.ubicacion small');
       if (addr) addr.textContent = site.address;
     }
-    
+
     // Redes Sociales y Links
     if (site.instagram) {
       document.querySelectorAll('.red.instagram').forEach(el => el.href = site.instagram);
@@ -504,22 +504,22 @@ window.PixisState = {
       // Actualiza todos los href que apuntan a wa.me o son de contacto directo
       document.querySelectorAll('a[href*="wa.me"], a.btn-wsp').forEach(el => {
         // Evita pisar enlaces si tienen customButtons, solo los genéricos
-        if(!el.classList.contains('btn-custom-pixis')) el.href = site.whatsappLink;
+        if (!el.classList.contains('btn-custom-pixis')) el.href = site.whatsappLink;
       });
     }
 
     // Botón principal de aplicar cambios
     const applyBtn = document.querySelector('.btn-apply-state');
     if (applyBtn) {
-       // Si ya tiene el tooltip lo ignoramos, si no lo agregamos
-       if (!applyBtn.querySelector('.apply-legend')) {
-          const legend = document.createElement('div');
-          legend.className = 'apply-legend';
-          legend.style.cssText = 'position:absolute; bottom:-12px; right:0; font-size:9px; color:#aaa; width:max-content; pointer-events:none; opacity:0.7;';
-          legend.innerHTML = 'Presiona aquí para subir todos tus cambios a la web pública.';
-          applyBtn.style.position = 'relative';
-          applyBtn.appendChild(legend);
-       }
+      // Si ya tiene el tooltip lo ignoramos, si no lo agregamos
+      if (!applyBtn.querySelector('.apply-legend')) {
+        const legend = document.createElement('div');
+        legend.className = 'apply-legend';
+        legend.style.cssText = 'position:absolute; bottom:-12px; right:0; font-size:9px; color:#aaa; width:max-content; pointer-events:none; opacity:0.7;';
+        legend.innerHTML = 'Presiona aquí para subir todos tus cambios a la web pública.';
+        applyBtn.style.position = 'relative';
+        applyBtn.appendChild(legend);
+      }
     }
 
     // 5. Banners Promocionales Dinámicos
@@ -579,7 +579,7 @@ window.PixisState = {
           if (cat.id !== 'destacados' && cat.id !== 'nuevos' && cat.active !== false) {
             let iconHtml = '';
             const mobileIcon = cat.icon || '📁';
-            
+
             // Prioridad para DESKTOP: 1. PNG Custom, 2. Icono mapeado, 3. Emoji original
             if (cat.customIcon) {
               const iconVersion = window.PIXIS_VERSION || Date.now();
@@ -601,7 +601,7 @@ window.PixisState = {
           }
         });
 
-        
+
         menuLista.innerHTML = htmlMenu;
 
         // Sincronizar resaltado después de renderizar dinámicamente
@@ -656,10 +656,10 @@ function renderDynamicCarousel(slides, carouselSelector) {
 
   // Limpiar previos dinámicos
   track.querySelectorAll('.dynamic-slide').forEach(el => el.remove());
-  
+
   // En Fase B, los ponemos ANTES de los estáticos
   track.insertAdjacentHTML('afterbegin', html);
-  
+
   // Limpiar dots para que se regeneren en initPixisBanners
   if (dotsContainer) dotsContainer.innerHTML = '';
 
@@ -675,7 +675,7 @@ function renderDynamicProducts(products) {
   // 1. Asegurar que el contenedor dinámico esté DENTRO del catálogo completo
   const catalogoCompleto = document.querySelector('#catalogo-completo .Gabinetes');
   if (catalogoCompleto && container.parentNode !== catalogoCompleto) {
-      catalogoCompleto.appendChild(container);
+    catalogoCompleto.appendChild(container);
   }
 
   // 2. Limpiar productos dinámicos anteriores
@@ -684,8 +684,8 @@ function renderDynamicProducts(products) {
   const activeCatIds = new Set(
     (window.PixisState && window.PixisState.state.categories)
       ? window.PixisState.state.categories
-          .filter(c => c.active !== false)
-          .map(c => c.id)
+        .filter(c => c.active !== false)
+        .map(c => c.id)
       : []
   );
 
@@ -703,19 +703,19 @@ function renderDynamicProducts(products) {
   // 2b. Limpiar los carruseles especiales si existen
   const destacadosTrack = document.getElementById('destacadosTrack');
   if (destacadosTrack) destacadosTrack.innerHTML = '';
-  
+
   const nuevosIngresosTrack = document.getElementById('nuevosIngresosTrack');
   if (nuevosIngresosTrack) nuevosIngresosTrack.innerHTML = '';
 
   // 2c. Limpiar todos los contenedores de productos existentes en el HTML (Migración JSON)
   // Esto asegura que no queden tarjetas estáticas duplicadas, pero PROTEGEMOS las secciones de Reels y Videos.
   document.querySelectorAll('.productos').forEach(p => {
-      const isDynamicContainer = p.id === 'dynamic-catalog-container';
-      const isSpecialSection = p.closest('.reels-section') || p.closest('.videos-section');
+    const isDynamicContainer = p.id === 'dynamic-catalog-container';
+    const isSpecialSection = p.closest('.reels-section') || p.closest('.videos-section');
 
-      if (!isDynamicContainer && !isSpecialSection) {
-          p.innerHTML = '';
-      }
+    if (!isDynamicContainer && !isSpecialSection) {
+      p.innerHTML = '';
+    }
   });
 
   // 3. PRE-CREAR CONTENEDORES PARA TODAS LAS CATEGORÍAS ACTIVAS
@@ -737,7 +737,7 @@ function renderDynamicProducts(products) {
         const newCatWrapper = document.createElement('div');
         newCatWrapper.className = 'dynamic-cat-wrapper Gabinetes';
         newCatWrapper.dataset.cat = catId;
-        
+
         let catName = catId.toUpperCase();
         const found = (window.PixisState && window.PixisState.state.categories)
           ? window.PixisState.state.categories.find(c => c.id === catId)
@@ -789,20 +789,20 @@ function renderDynamicProducts(products) {
 
     validCats.forEach(catId => {
       const card = document.createElement('a');
-      
+
       const isProximo = prod.proximoIngreso === true;
       card.className = `card pulsante2 dynamic-injected${isProximo ? ' proximo-ingreso' : ''}`;
       card.href = `?producto=${slug}`;
-      
-      card.dataset.title        = prod.title   || '';
-      card.dataset.price        = transferPriceFormatted;
-      card.dataset.img          = coverImg;
-      card.dataset.category     = catId;
+
+      card.dataset.title = prod.title || '';
+      card.dataset.price = transferPriceFormatted;
+      card.dataset.img = coverImg;
+      card.dataset.category = catId;
       // Siempre asignar gallery (aunque sea una sola imagen) para que cart.js la use
       if (galleryStr) card.dataset.gallery = galleryStr;
-      card.dataset.desc         = prod.desc    || '';
+      card.dataset.desc = prod.desc || '';
       card.dataset.subcategoria = prod.subcategoria || '';
-      card.dataset.pixisId      = prod.id;
+      card.dataset.pixisId = prod.id;
       card.dataset.proximoIngreso = isProximo ? 'true' : 'false';
       if (prod.customButtons) card.dataset.customButtons = JSON.stringify(prod.customButtons);
       if (prod.banners) card.dataset.banners = JSON.stringify(prod.banners);
@@ -818,7 +818,7 @@ function renderDynamicProducts(products) {
         <h3>${escStateHtml(prod.title)}</h3>
         <p>${escStateHtml(prod.subcategoria || '')}</p>
         <div class="precio-box">
-          <span class="precio-label">PRECIO ESPECIAL</span>
+          <span class="precio-label">PRECIO ESPECIAL EFECTIVO SOLO EN PEDIDOS POR LA WEB</span>
           <span class="precio">${priceFormatted}</span>
         </div>
         <button class="btn-add-cart"

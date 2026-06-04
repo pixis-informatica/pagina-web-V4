@@ -42,13 +42,13 @@
       "bannerId": "geforcertxseries50"
     },
     {
-      "imgPc": "img/carrusel/monitor-rapto-pc-1779478620997.jpg",
-      "imgMobile": "img/carrusel/monitor-rapto-mobile-1779478624353.jpg",
+      "imgPc": "img/carrusel/monitores-pro-pc-1780607730885.jpg",
+      "imgMobile": "img/carrusel/monitores-pro-mobile-1780607751962.jpg",
       "bannerId": "monitor"
     },
     {
       "imgPc": "img/carrusel/refrigeracion-pc-1780417513051.jpg",
-      "imgMobile": "img/carrusel/refrigeracion-mobile-1780417519921.jpg",
+      "imgMobile": "img/carrusel/monitores-pro-mobile-1780607737222.jpg",
       "bannerId": "refrigeracion-raptor"
     },
     {
@@ -117,7 +117,7 @@
       "t": "GABINETES MLOGIX"
     }
   },
-  "cacheVersion": 1780601554559,
+  "cacheVersion": 1780608529715,
   "tasasCuotas": [
     1.13,
     1.31,
